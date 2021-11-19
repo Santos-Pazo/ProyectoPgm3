@@ -1,8 +1,3 @@
- 
-
-
-
-
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View, ActivityIndicator, Image, FlatList, TextInput} from 'react-native';
 import {StyleSheet} from 'react-native';
