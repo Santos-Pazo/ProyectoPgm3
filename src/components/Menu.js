@@ -6,6 +6,7 @@ import Login from '../screens/login'
 import Register from '../screens/register'
 import {auth} from '../firebase/config'
 import Profile from '../screens/profile'
+import Posts from '../screens/posts'
  
 const Drawer = createDrawerNavigator();
  
@@ -14,10 +15,20 @@ class Menu extends Component {
         super(props);
         this.state ={
             logueado: false,
-            userData: '',
+            userData: {},
             errorCode:'',
             errorMessage:''
         }
+    }
+    componentDidMount(){
+        auth.onAuthStateChanged( user => {
+            if (user){
+                this.setState({
+                    logueado: true,
+                    userData: user,
+                })
+            }
+        })
     }
  
     register(email, pass){
@@ -37,11 +48,11 @@ class Menu extends Component {
  
     login(email, pass){
         auth.signInWithEmailAndPassword(email, pass)
-        .then( response => {
+        .then(user => {
             console.log('logueado');
-            console.log(response);
+            console.log(user);
             this.setState({
-                userData: response,
+                userData: user,
                 logueado: true
             })
         })
@@ -78,7 +89,8 @@ class Menu extends Component {
                
                 <Drawer.Navigator>
                     <Drawer.Screen name="Home" component={() => <Home/>} />
-                    <Drawer.Screen name="Profile" component={() => <Profile logout={()=> this.logout()} userData={this.state.userData} />} />                
+                    <Drawer.Screen name="Profile" component={() => <Profile logout={()=> this.logout()} userData={this.state.userData} />} />   
+                    <Drawer.Screen name="Posts" component={(drawerProps) => <Posts drawerProps={drawerProps} />} />             
                 </Drawer.Navigator>      
         )
     }

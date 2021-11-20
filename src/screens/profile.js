@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View, ActivityIndicator, Image, FlatList, TextInput} from 'react-native';
 import {StyleSheet} from 'react-native';
+import {auth} from '../firebase/config';
  
 class Profile extends Component{
     constructor(props){
@@ -13,14 +14,12 @@ class Profile extends Component{
         return(
            <View>
                <Text>My profile</Text>
-               <Text>Email del usuario: {this.props}</Text>
+               <Text>Email del usuario: {auth.currentUser.email}</Text>
                <Text>Fecha de creación:</Text>
                <Text>Ultima conexión:</Text>
                <TouchableOpacity onPress={() => this.props.logout()} style={styles.boton}>
                    <Text> Logout</Text>
                </TouchableOpacity>
- 
- 
            </View>
         )
     }

@@ -1,15 +1,34 @@
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View, ActivityIndicator, Image, FlatList, TextInput} from 'react-native';
 import {StyleSheet} from 'react-native';
-import Register from './register';
+import {auth, db} from '../firebase/config';
  
  
 class Home extends Component{
     constructor(){
         super()
         this.state ={
-           
+           posts: [],
+
         }
+    }
+
+    componentDidMount(){
+        db.collection('Posts').orderBy('createAt', 'desc').onSnapshot(
+            docs => {
+                let posteos = [];
+                docs.forEach(doc => {
+                    posteos.push({
+                        id: doc.id,
+                        data: doc.data()
+                    })
+                })
+
+                this.setState({
+                    posts: posteos,
+                })
+            }
+        )
     }
  
    
@@ -17,7 +36,11 @@ class Home extends Component{
         return(
             <View style={styles.body}>
                 <Text>Bienvenidos a Köy </Text>
-                <Text>Lpm</Text>
+                <FlatList 
+                data ={this.state.posts}
+                keyExtractor= {post => post.id}
+                renderItem= {({item})=> <Text>{item.data.post}</Text>}
+                 />
             </View>
         )
     }

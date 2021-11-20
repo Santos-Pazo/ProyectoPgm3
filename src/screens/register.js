@@ -17,7 +17,7 @@ class Register extends Component{
  
     render(){
         return(
-           <View style={styles.contenedor}>
+           <View style={styles.formContainer}>
                <Text> Register </Text>
                <TextInput
                     style={styles.input}
@@ -63,19 +63,19 @@ class Register extends Component{
 }
  
 const styles = StyleSheet.create({
-    contenedor: {
-        paddingHorizontal: 10,
-        margenSuperior: 20
+    formContainer:{
+        paddingHorizontal:10,
+        marginTop: 20,
     },
     input:{
-        height: 20,
-        paddingVertical: 15,
+        height:50,
+        paddingVertical:15,
         paddingHorizontal: 10,
-        borderWidth: 1,
-        // borderColor: red,
-        // border: solid,
-        // borderRadius: 6,
-        marginVertical: 10,
+        borderWidth:1,
+        borderColor: '#ccc',
+        borderStyle: 'solid',
+        borderRadius: 6,
+        marginVertical:10,
     },
     boton:{
         backgroundColor: '#28a745',
