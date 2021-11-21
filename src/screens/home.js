@@ -9,7 +9,7 @@ class Home extends Component{
         super()
         this.state ={
            posts: [],
-
+           cargando: true,
         }
     }
 
@@ -26,6 +26,7 @@ class Home extends Component{
 
                 this.setState({
                     posts: posteos,
+                    cargando: false
                 })
             }
         )
@@ -34,14 +35,17 @@ class Home extends Component{
    
     render(){
         return(
-            <View style={styles.body}>
-                <Text>Bienvenidos a Köy </Text>
-                <FlatList 
-                data ={this.state.posts}
-                keyExtractor= {post => post.id}
-                renderItem= {({item})=> <Text>{item.data.post}</Text>}
-                 />
-            </View>
+            this.state.cargando == false ?
+                <View style={styles.body}>
+                    <Text>Bienvenidos a Köy </Text>
+                    <FlatList 
+                    data ={this.state.posts}
+                    keyExtractor= {post => post.id}
+                    renderItem= {({item})=> <Text>{item.data.post}</Text>}
+                    />
+                </View>
+                :
+                <View><ActivityIndicator/></View>
         )
     }
    

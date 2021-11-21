@@ -9,14 +9,19 @@ class Profile extends Component{
         this.state ={
         }
     }
+
+    log(){
+        console.log(auth.currentUser);
+    }
  
     render(){
         return(
            <View>
                <Text>My profile</Text>
                <Text>Email del usuario: {auth.currentUser.email}</Text>
-               <Text>Fecha de creación:</Text>
-               <Text>Ultima conexión:</Text>
+               <Text>Fecha de creación: {auth.currentUser.metadata.creationTime}</Text>
+               
+               <Text>Ultima conexión: {auth.currentUser.metadata.lastSignInTime}</Text>
                <TouchableOpacity onPress={() => this.props.logout()} style={styles.boton}>
                    <Text> Logout</Text>
                </TouchableOpacity>

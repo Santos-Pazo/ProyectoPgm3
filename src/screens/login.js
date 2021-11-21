@@ -40,18 +40,7 @@ class Login extends Component{
                <Text>{this.props.errorMessage}</Text>
                
                
-               <View>
-                   <Text>
-                        {this.state.username}
-                   </Text>
-                   <Text>
-                        {this.state.email}
-                   </Text>
-                   <Text>
-                        {this.state.password}  
-                   </Text>
-               </View>
- 
+               
                
            </View>
         )
