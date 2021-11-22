@@ -79,16 +79,19 @@ class Menu extends Component {
         return(
            
                 this.state.logueado == false ?
-                <Drawer.Navigator>
-                    <Drawer.Screen name="Register" component={() => <Register register={(email, pass)=> this.register(email, pass)} errorCode={this.state.errorCode} errorMessage={this.state.errorMessage} />}/>
-                    <Drawer.Screen name="Login" component={() => <Login login={(email, pass)=> this.login(email, pass)}  errorCode={this.state.errorCode} errorMessage={this.state.errorMessage} />} />
-                </Drawer.Navigator> :
-               
-                <Drawer.Navigator>
-                    <Drawer.Screen name="Home" component={() => <Home/>} />
-                    <Drawer.Screen name="Profile" component={() => <Profile logout={()=> this.logout()} userData={this.state.userData} />} />   
-                    <Drawer.Screen name="Posts" component={(drawerProps) => <Posts drawerProps={drawerProps} />} />             
-                </Drawer.Navigator>      
+                <NavigationContainer>
+                    <Drawer.Navigator>
+                        <Drawer.Screen name="Register" component={() => <Register register={(email, pass)=> this.register(email, pass)} errorCode={this.state.errorCode} errorMessage={this.state.errorMessage} />}/>
+                        <Drawer.Screen name="Login" component={() => <Login login={(email, pass)=> this.login(email, pass)}  errorCode={this.state.errorCode} errorMessage={this.state.errorMessage} />} />
+                    </Drawer.Navigator> 
+               </NavigationContainer> :
+               <NavigationContainer>
+                    <Drawer.Navigator>
+                        <Drawer.Screen name="Home" component={() => <Home/>} />
+                        <Drawer.Screen name="Profile" component={() => <Profile logout={()=> this.logout()} userData={this.state.userData} />} />   
+                        <Drawer.Screen name="Posts" component={(drawerProps) => <Posts drawerProps={drawerProps} />} />             
+                    </Drawer.Navigator>      
+               </NavigationContainer>
         )
     }
 }
