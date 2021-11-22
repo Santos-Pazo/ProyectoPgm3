@@ -8,12 +8,13 @@ class Register extends Component{
         this.state ={
            email: '',
            password: '',
-           username: ''
+           username: '',
+           disabled: true
         }
     }
-    submit(){
-        console.log(this.state)
-    }
+       
+
+    
  
     render(){
         return(
@@ -24,6 +25,7 @@ class Register extends Component{
                     keyboardType='email-address'
                     placeholder='email'
                     onChangeText={(text)=> this.setState({email: text})}>
+                    
                </TextInput>
                <TextInput
                     style={styles.input}
@@ -38,7 +40,7 @@ class Register extends Component{
                     secureTextEntry={true}
                     onChangeText={(text)=> this.setState({password: text})}>
                </TextInput>
-               <TouchableOpacity onPress={() => this.props.register(this.state.email, this.state.password)} style={styles.boton}>
+               <TouchableOpacity onPress={() => this.props.register(this.state.email, this.state.password)} style={styles.boton} disabled={this.state.disabled}>
                    <Text> Register </Text>
                </TouchableOpacity>
                {/* <Text>{this.props.errorCode}</Text> */}

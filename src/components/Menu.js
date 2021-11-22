@@ -4,9 +4,10 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import Home from '../screens/home'
 import Login from '../screens/login'
 import Register from '../screens/register'
-import {auth} from '../firebase/config'
+import {auth, db} from '../firebase/config'
 import Profile from '../screens/profile'
 import Posts from '../screens/posts'
+import Buscador from '../screens/buscador'
  
 const Drawer = createDrawerNavigator();
  
@@ -17,7 +18,8 @@ class Menu extends Component {
             logueado: false,
             userData: {},
             errorCode:'',
-            errorMessage:''
+            errorRegistro:'',
+            errorLogin: '',
         }
     }
     componentDidMount(){
@@ -36,11 +38,11 @@ class Menu extends Component {
         .then((response)=>{
             console.log(response)
         })
-        .catch( error => {
-            console.log(error);
+        .catch( e => {
+            console.log(e);
             this.setState({
-                errorCode: error.code,
-                errorMessage: error.message ,
+                errorCode: e.code,
+                errorRegistro: e.message ,
             })
         })
     }
@@ -58,7 +60,7 @@ class Menu extends Component {
             console.log(error);
             this.setState({
                 errorCode: error.code,
-                errorMessage: error.message ,
+                errorLogin: error.message ,
             })
         })
     }
@@ -74,22 +76,26 @@ class Menu extends Component {
             console.log(error);
         })
     }
- 
+
+    
+
+
     render (){
         return(
            
                 this.state.logueado == false ?
                 <NavigationContainer>
                     <Drawer.Navigator>
-                        <Drawer.Screen name="Register" component={() => <Register register={(email, pass)=> this.register(email, pass)} errorCode={this.state.errorCode} errorMessage={this.state.errorMessage} />}/>
-                        <Drawer.Screen name="Login" component={() => <Login login={(email, pass)=> this.login(email, pass)}  errorCode={this.state.errorCode} errorMessage={this.state.errorMessage} />} />
+                        <Drawer.Screen name="Register" component={() => <Register register={(email, pass )=> this.register(email, pass)} errorCode={this.state.errorCode} errorMessage={this.state.errorRegistro} />}/>
+                        <Drawer.Screen name="Login" component={() => <Login login={(email, pass)=> this.login(email, pass)}  errorCode={this.state.errorCode} errorMessage={this.state.errorLogin} />} />
                     </Drawer.Navigator> 
                </NavigationContainer> :
                <NavigationContainer>
                     <Drawer.Navigator>
                         <Drawer.Screen name="Home" component={() => <Home/>} />
                         <Drawer.Screen name="Profile" component={() => <Profile logout={()=> this.logout()} userData={this.state.userData} />} />   
-                        <Drawer.Screen name="Posts" component={(drawerProps) => <Posts drawerProps={drawerProps} />} />             
+                        <Drawer.Screen name="Posts" component={(drawerProps) => <Posts drawerProps={drawerProps} />} />      
+                        <Drawer.Screen name="Buscador" component={() => <Buscador/>} />       
                     </Drawer.Navigator>      
                </NavigationContainer>
         )
