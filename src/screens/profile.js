@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Text, TouchableOpacity, View, ActivityIndicator, Image, FlatList, TextInput} from 'react-native';
 import {StyleSheet} from 'react-native';
 import {auth, db} from '../firebase/config';
+
+
  
 class Profile extends Component{
     constructor(props){
@@ -11,8 +13,9 @@ class Profile extends Component{
         }
     }
 
+    
     componentDidMount(){
-        db.collection('Posts').where("owner","==", "currentUser.email").onSnapshot(
+        db.collection('Posts').where("owner","==", auth.currentUser.email).onSnapshot(
             docs => {
                 let posteos = [];
                 docs.forEach(doc => {
@@ -25,6 +28,7 @@ class Profile extends Component{
                 this.setState({
                     posts: posteos,
                 })
+                console.log(this.state.posts);
             }
         )
     }

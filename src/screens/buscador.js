@@ -7,12 +7,28 @@ class Buscador extends Component{
     constructor(props){
         super(props)
         this.state ={
-           search:''
+           search:'',
+           posts: []
         }
     }
 
     buscador(){
-        db
+        db.collection('Posts').where("owner","==", this.state.search).onSnapshot(
+            docs => {
+                let posteos = [];
+                docs.forEach(doc => {
+                    posteos.push({
+                        id: doc.id,
+                        data: doc.data()
+                    })
+                })
+
+                this.setState({
+                    posts: posteos,
+                })
+                console.log(this.state.posts);
+            }
+        )
     }
  
     render(){
@@ -24,9 +40,16 @@ class Buscador extends Component{
                     placeholder='Busca amigos aca...'
                     onChangeText={(text)=> this.setState({search: text})}>
                </TextInput>
-               <TouchableOpacity style={styles.boton}>
+               <TouchableOpacity style={styles.boton} onPress={()=> this.buscador()}>
                    <Text> Buscar </Text>
                </TouchableOpacity>
+
+               <FlatList 
+                    data ={this.state.posts}
+                    keyExtractor= {post => post.id}
+                    renderItem= {({item})=> <Text>{item.data.post}</Text>}
+                />
+
            </View>
         )
     }
