@@ -8,8 +8,11 @@ import {auth, db} from '../firebase/config'
 import Profile from '../screens/profile'
 import Posts from '../screens/posts'
 import Buscador from '../screens/buscador'
+import { getAuth } from "firebase/auth";
  
 const Drawer = createDrawerNavigator();
+
+const user = auth.currentUser;
  
 class Menu extends Component {
     constructor(props){
@@ -31,12 +34,19 @@ class Menu extends Component {
                 })
             }
         })
+        if (user !== null) {
+            // The user object has basic properties such as display name, email, etc.
+            const displayName = user.displayName;
+            const email = user.email;
+            const uid = user.uid;
+          }
+        
     }
  
     register(email, pass){
         auth.createUserWithEmailAndPassword(email, pass)
         .then((response)=>{
-            console.log(response)
+            // console.log(response);
         })
         .catch( e => {
             console.log(e);
@@ -46,11 +56,12 @@ class Menu extends Component {
             })
         })
     }
+    
  
     login(email, pass){
-        auth.signInWithEmailAndPassword(email, pass)
+        auth.signInWithEmailAndPassword(email, pass )
         .then(user => {     
-            console.log(user);
+            // console.log(user);
             this.setState({
                 userData: user,
                 logueado: true
@@ -76,8 +87,6 @@ class Menu extends Component {
             console.log(error);
         })
     }
-
-    
 
 
     render (){

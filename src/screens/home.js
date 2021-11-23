@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Text, TouchableOpacity, View, ActivityIndicator, Image, FlatList, TextInput} from 'react-native';
 import {StyleSheet} from 'react-native';
 import {auth, db} from '../firebase/config';
- 
+import Post from '../components/Post';
  
 class Home extends Component{
     constructor(){
@@ -36,25 +36,37 @@ class Home extends Component{
     render(){
         return(
             this.state.cargando == false ?
-                <View style={styles.body}>
-                    <Text>Bienvenidos a Köy </Text>
+            <React.Fragment>
+                <View style={styles.bodyArriba}> 
+                    <Text >Bienvenidos a Köy </Text>
+                </View>
+                <View style={styles.bodyAbajo}> 
                     <FlatList 
+                     
                     data ={this.state.posts}
                     keyExtractor= {post => post.id}
-                    renderItem= {({item})=> <Text>{item.data.post}  {item.data.owner}</Text>}
+                    renderItem= {({item})=> <Post data={item}/>}
                     />
                 </View>
+                   
+            </React.Fragment>
                 :
-                <View><ActivityIndicator/></View>
+            <View><ActivityIndicator/></View>
         )
     }
    
    
 }
 const styles = StyleSheet.create({
-        body:{
+        bodyArriba:{
+            flex: 1,
             backgroundColor: '#9DF4F5'
+        },
+        bodyAbajo:{
+            flex: 8,
+            backgroundColor: '#C14242'
         }
+
 })
  
 export default Home;

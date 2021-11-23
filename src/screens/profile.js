@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Text, TouchableOpacity, View, ActivityIndicator, Image, FlatList, TextInput} from 'react-native';
 import {StyleSheet} from 'react-native';
 import {auth, db} from '../firebase/config';
-
+import Post from '../components/Post';
 
  
 class Profile extends Component{
@@ -10,6 +10,7 @@ class Profile extends Component{
         super(props)
         this.state ={
             posts: [],
+            deletePost: ''
         }
     }
 
@@ -33,11 +34,18 @@ class Profile extends Component{
         )
     }
 
+    
+    borrar(){
+
+    }
+
+
+    
     render(){
         return(
            <View>
                <Text>My profile</Text>
-               {/* <Text> {auth.currentUser.displayName} </Text> */}
+               <Text> {auth.currentUser.displayName} </Text>
                <Text>Email del usuario: {auth.currentUser.email}</Text>
                <Text>Fecha de creación: {auth.currentUser.metadata.creationTime}</Text>
                <Text>Ultima conexión: {auth.currentUser.metadata.lastSignInTime}</Text>
@@ -45,10 +53,19 @@ class Profile extends Component{
                    <Text> Logout</Text>
                </TouchableOpacity>
 
+               <Text>{this.state.posts.length} </Text>
+
                <FlatList 
+                    
                     data ={this.state.posts}
                     keyExtractor= {post => post.id}
-                    renderItem= {({item})=> <Text>{item.data.post}</Text>}
+                    renderItem= {({item})=> 
+                        <React.Fragment>
+                            <Post data={item}/>
+                            <TouchableOpacity onPress={()=> this.borrar()} >
+                                <Text>Borrar</Text> 
+                            </TouchableOpacity> 
+                        </React.Fragment>}
                 />
 
                
@@ -64,7 +81,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         alignContent: 'center',
         borderWidth: 1
-    }
+    },
+    
 })
  
 export default Profile
