@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View, ActivityIndicator, Image, FlatList, TextInput} from 'react-native';
 import {StyleSheet} from 'react-native';
+import Camara from "../components/Camara";
 import {auth, db} from '../firebase/config';
 import Home from './home';
 import { NavigationContainer } from '@react-navigation/native'
@@ -12,6 +13,10 @@ class Posts extends Component{
         super(props)
         this.state ={
             post: '',
+            foto: '',
+            estado: '',
+            displayCamera: true,
+            comentario: '',
             
         }
     }
@@ -21,20 +26,31 @@ class Posts extends Component{
             owner: auth.currentUser.email,
             post: this.state.post,
             createAt: Date.now(),
-            
-        })
+            picture: this.state.foto
+             })
         .then( ()=> {
             this.setState({
                 post: '',
+                estado: '',
+                displayCamera: true,
+
             })
             
             this.props.drawerProps.navigation.navigate('Home')
         })
         .catch( e=> console.log(e))
     }
+    uploadPicture(foto){
+        this.setState({
+            foto: foto,
+            displayCamera: false,
+        })
+    }
  
     render(){
-        return(
+        return this.state.displayCamera ? (
+            <Camara uploadPicture={(foto) => this.uploadPicture (foto)} />
+        ) : (
            <View style={styles.formContainer}>
                 <TextInput
                     style={styles.input}

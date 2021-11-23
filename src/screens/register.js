@@ -9,7 +9,7 @@ class Register extends Component{
            email: '',
            password: '',
            username: '',
-           disabled: true
+           disabled: false
         }
     }
        
