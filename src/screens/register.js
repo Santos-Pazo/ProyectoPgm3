@@ -1,19 +1,41 @@
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View, ActivityIndicator, Image, FlatList, TextInput} from 'react-native';
 import {StyleSheet} from 'react-native';
- 
+
+let val = 0;
+
 class Register extends Component{
     constructor(props){
         super(props)
         this.state ={
-           email: '',
+           mail: '',
            password: '',
            username: '',
            disabled: false
         }
     }
-       
 
+    
+    
+        //  if(this.state.password = ""){
+        //     val ++;
+        // }
+        // if(this.state.mail = ""){
+        //     val ++;
+        // }
+        // if(this.state.userName = ""){
+        //     val ++;
+        // }
+        // if(val == 3){
+        //     this.setState({
+        //         disabled: true
+        //     })
+        // } else {
+        //     this.setState({
+        //         disabled: false
+        //     })
+        // }
+    
     
  
     render(){
@@ -24,14 +46,14 @@ class Register extends Component{
                     style={styles.input}
                     keyboardType='email-address'
                     placeholder='email'
-                    onChangeText={(text)=> this.setState({email: text})}>
+                    onChangeText={(text)=> this.setState({mail: text})}>
                     
                </TextInput>
                <TextInput
                     style={styles.input}
                     keyboardType='default'
                     placeholder='username'
-                    onChangeText={(text)=> this.setState({username: text})}>
+                    onChangeText={(text)=> this.setState({userName: text})}>
                </TextInput>
                <TextInput
                     style={styles.input}
@@ -40,7 +62,7 @@ class Register extends Component{
                     secureTextEntry={true}
                     onChangeText={(text)=> this.setState({password: text})}>
                </TextInput>
-               <TouchableOpacity onPress={() => this.props.register(this.state.email, this.state.password)} style={styles.boton} disabled={this.state.disabled}>
+               <TouchableOpacity onPress={() => this.props.register(this.state.mail, this.state.password )}  style={styles.boton} disabled={this.state.disabled}>
                    <Text> Register </Text>
                </TouchableOpacity>
                {/* <Text>{this.props.errorCode}</Text> */}

@@ -2,13 +2,16 @@ import React, {Component} from 'react';
 import {Text, TouchableOpacity, View, ActivityIndicator, Image, FlatList, TextInput} from 'react-native';
 import {StyleSheet} from 'react-native';
 import {auth, db} from '../firebase/config'
+import Post from '../components/Post'
+import { TouchableHighlight } from 'react-native-gesture-handler';
  
 class Buscador extends Component{
     constructor(props){
         super(props)
         this.state ={
            search:'',
-           posts: []
+           posts: [], 
+           
         }
     }
 
@@ -22,10 +25,11 @@ class Buscador extends Component{
                         data: doc.data()
                     })
                 })
-
                 this.setState({
                     posts: posteos,
                 })
+               
+                
                 console.log(this.state.posts);
             }
         )
@@ -44,17 +48,23 @@ class Buscador extends Component{
                    <Text> Buscar </Text>
                </TouchableOpacity>
 
-               <FlatList 
-                    data ={this.state.posts}
-                    keyExtractor= {post => post.id}
-                    renderItem= {({item})=> <Text>{item.data.post}</Text>}
-                />
-
+               <React.Fragment>
+                    {this.state.posts.length == "0" ?
+                        <Text>El usuario no existe o todavio no publico </Text> :
+                        <FlatList 
+                        data ={this.state.posts}
+                        keyExtractor= {post => post.id}
+                        renderItem= {({item})=><Post data={item} />} />
+                
+                    }
+               </React.Fragment>
            </View>
         )
     }
 }
  
+
+
 const styles = StyleSheet.create({
     formContainer:{
         paddingHorizontal:10,
@@ -82,3 +92,5 @@ const styles = StyleSheet.create({
  
  
 export default Buscador
+
+

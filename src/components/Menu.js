@@ -8,8 +8,12 @@ import {auth, db} from '../firebase/config'
 import Profile from '../screens/profile'
 import Posts from '../screens/posts'
 import Buscador from '../screens/buscador'
+import { getAuth } from "firebase/auth";
+import { StyleSheet } from 'react-native'
  
 const Drawer = createDrawerNavigator();
+
+const user = auth.currentUser;
  
 class Menu extends Component {
     constructor(props){
@@ -31,12 +35,19 @@ class Menu extends Component {
                 })
             }
         })
+        if (user !== null) {
+            // The user object has basic properties such as display name, email, etc.
+            const displayName = user.displayName;
+            const email = user.email;
+            const uid = user.uid;
+          }
+        
     }
  
     register(email, pass){
         auth.createUserWithEmailAndPassword(email, pass)
         .then((response)=>{
-            console.log(response)
+            // console.log(response);
         })
         .catch( e => {
             console.log(e);
@@ -46,11 +57,12 @@ class Menu extends Component {
             })
         })
     }
+    
  
     login(email, pass){
-        auth.signInWithEmailAndPassword(email, pass)
+        auth.signInWithEmailAndPassword(email, pass )
         .then(user => {     
-            console.log(user);
+            // console.log(user);
             this.setState({
                 userData: user,
                 logueado: true
@@ -77,21 +89,19 @@ class Menu extends Component {
         })
     }
 
-    
-
 
     render (){
         return(
            
                 this.state.logueado == false ?
-                <NavigationContainer>
-                    <Drawer.Navigator>
+                <NavigationContainer >
+                    <Drawer.Navigator >
                         <Drawer.Screen name="Register" component={() => <Register register={(email, pass )=> this.register(email, pass)} errorCode={this.state.errorCode} errorMessage={this.state.errorRegistro} />}/>
                         <Drawer.Screen name="Login" component={() => <Login login={(email, pass)=> this.login(email, pass)}  errorCode={this.state.errorCode} errorMessage={this.state.errorLogin} />} />
                     </Drawer.Navigator> 
                </NavigationContainer> :
-               <NavigationContainer>
-                    <Drawer.Navigator>
+               <NavigationContainer style={styles.navegacion} >
+                    <Drawer.Navigator style={styles.navegacion}>
                         <Drawer.Screen name="Home" component={() => <Home/>} />
                         <Drawer.Screen name="Profile" component={() => <Profile logout={()=> this.logout()} userData={this.state.userData} />} />   
                         <Drawer.Screen name="Posts" component={(drawerProps) => <Posts drawerProps={drawerProps} />} />      
@@ -101,6 +111,13 @@ class Menu extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    navegacion:{
+        backgroundColor: '#8E05A3'
+    }
+
+})
  
 export default Menu;
  
