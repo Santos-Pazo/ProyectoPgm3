@@ -9,6 +9,7 @@ import Profile from '../screens/profile'
 import Posts from '../screens/posts'
 import Buscador from '../screens/buscador'
 import { getAuth } from "firebase/auth";
+import { StyleSheet } from 'react-native'
  
 const Drawer = createDrawerNavigator();
 
@@ -93,14 +94,14 @@ class Menu extends Component {
         return(
            
                 this.state.logueado == false ?
-                <NavigationContainer>
-                    <Drawer.Navigator>
+                <NavigationContainer >
+                    <Drawer.Navigator >
                         <Drawer.Screen name="Register" component={() => <Register register={(email, pass )=> this.register(email, pass)} errorCode={this.state.errorCode} errorMessage={this.state.errorRegistro} />}/>
                         <Drawer.Screen name="Login" component={() => <Login login={(email, pass)=> this.login(email, pass)}  errorCode={this.state.errorCode} errorMessage={this.state.errorLogin} />} />
                     </Drawer.Navigator> 
                </NavigationContainer> :
-               <NavigationContainer>
-                    <Drawer.Navigator>
+               <NavigationContainer style={styles.navegacion} >
+                    <Drawer.Navigator style={styles.navegacion}>
                         <Drawer.Screen name="Home" component={() => <Home/>} />
                         <Drawer.Screen name="Profile" component={() => <Profile logout={()=> this.logout()} userData={this.state.userData} />} />   
                         <Drawer.Screen name="Posts" component={(drawerProps) => <Posts drawerProps={drawerProps} />} />      
@@ -110,6 +111,13 @@ class Menu extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    navegacion:{
+        backgroundColor: '#8E05A3'
+    }
+
+})
  
 export default Menu;
  

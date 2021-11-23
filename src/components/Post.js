@@ -17,15 +17,34 @@ class Post extends Component{
  
     render(){
         return(
-           <View style={styles.formContainer}>
-               <Text>{this.props.data.data.post} </Text>
-               <Text>{this.props.data.data.owner}</Text>
-           </View>
+            <React.Fragment>
+                <View style={styles.postConteiner}>
+                    <Text >{this.props.data.data.post} </Text>
+                    <Text >{this.props.data.data.owner}</Text>
+                </View>
+            </React.Fragment>
         )
     }
 }
  
 const styles = StyleSheet.create({
+    postConteiner:{
+        borderBottomWidth: 3,
+        borderRightWidth: 3,
+        
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+        marginTop: 50,
+        alignItems: 'center',
+        backgroundColor: '#13E0F0',
+        padding: 30
+    },
+    postFoto:{
+
+    },
+    postDescription:{
+
+    }
 })
  
  
