@@ -23,9 +23,9 @@ class Posts extends Component{
 
     sumbit(){
         db.collection('Posts').add({
-            owner: auth.currentUser.email,
+            owner: auth.currentUser.displayName,
             post: this.state.post,
-            createAt: Date.now(),
+            createdAt: Date.now(),
             picture: this.state.foto
              })
         .then( ()=> {

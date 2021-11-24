@@ -16,7 +16,9 @@ class Profile extends Component{
 
     
     componentDidMount(){
-        db.collection('Posts').where("owner","==", auth.currentUser.email).onSnapshot(
+        db.collection('Posts')
+        .where("owner","==", auth.currentUser.displayName)
+        .onSnapshot(
             docs => {
                 let posteos = [];
                 docs.forEach(doc => {

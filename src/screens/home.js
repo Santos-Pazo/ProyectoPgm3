@@ -45,7 +45,7 @@ class Home extends Component{
                      
                     data ={this.state.posts}
                     keyExtractor= {post => post.id}
-                    renderItem= {({item})=> <Post data={item}/>}
+                    renderItem= {({item})=> <Post postData={item}/>}
                     />
                 </View>
                    
