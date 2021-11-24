@@ -118,7 +118,7 @@ class Post extends Component{
                             </TouchableOpacity> 
                         : null}
                         <TouchableOpacity onPress={()=>this.openModal()}>
-                            <Text> </Text>
+                            <Text> Comentar</Text>
                         </TouchableOpacity>
                         { this.state.myLike ?
                             <TouchableOpacity onPress={() => this.dislikePost()}>
@@ -131,7 +131,7 @@ class Post extends Component{
                         }
                     </View>
 
-                    {/* { ! this.state.showModal ?
+                    { ! this.state.showModal ?
                        null
                         :
                             <Modal
@@ -176,7 +176,7 @@ class Post extends Component{
                             </Modal>
                            
                 }
-                 */}
+                 
             </View>
         )
     }
