@@ -21,7 +21,7 @@ class Posts extends Component{
         }
     }
 
-    sumbit(){
+    submit(){
         db.collection('Posts').add({
             owner: auth.currentUser.displayName,
             post: this.state.post,
@@ -61,7 +61,7 @@ class Posts extends Component{
                     onChangeText={(text)=> this.setState({post: text})}>
                </TextInput>
                
-               <TouchableOpacity onPress={() => this.sumbit() } style={styles.boton}>
+               <TouchableOpacity onPress={() => this.submit() } style={styles.boton}>
                    <Text> Submit </Text>
                </TouchableOpacity>
 

@@ -16,16 +16,16 @@ class Home extends Component{
     componentDidMount(){
         db.collection('Posts').orderBy('createAt', 'desc').onSnapshot(
             docs => {
-                let posteos = [];
+                let posts = [];
                 docs.forEach(doc => {
-                    posteos.push({
+                    posts.push({
                         id: doc.id,
                         data: doc.data()
                     })
                 })
 
                 this.setState({
-                    posts: posteos,
+                    posts: posts,
                     cargando: false
                 })
             }
