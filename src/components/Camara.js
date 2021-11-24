@@ -58,42 +58,101 @@ import { Camera } from "expo-camera";
     }
 
     render() {
-        return (
-            <>
-                {this.state.photo ? (
-                    <>
-                        <Image
-                            style={{ flex: 1, width: "100%" }}
-                            source={{ uri: this.state.photo }}
+        return (<React.Fragment>
+            {
+                this.state.permission ?
+                    this.state.photo ?
+                    <React.Fragment>
+                        <Image 
+                            style={styles.preview}
+                            source={ {uri:this.state.photo} }
                         />
-                        <View>
-                            <TouchableOpacity  onPress={() => this.savePicture()}>
-                                <Text>Accept</Text>
+                        <View >
+                            <TouchableOpacity style={styles.buttonBlue} onPress={()=>this.savePicture()}>
+                                <Text> Aceptar </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity  onPress={() => this.deletePicture()}>
-                                <Text>Cancel</Text>
+                            <TouchableOpacity style={styles.buttonGrey} onPress={()=>this.deletePicture()}>
+                                <Text> Rechazar </Text>
                             </TouchableOpacity>
                         </View>
-                    </>
-                ) : (
-                   
-                    <View style={{ flex: 1 ,width: "100%" }}>
-                        
-                        <Camera
-                            type={Camera.Constants.Type.front}
-                            style={{ flex: 1 ,width: "100%" }}
-                            ref={(cam) => (this.camera = cam)}
+                    </React.Fragment>
+                    :
+                    <React.Fragment>
+                        <Camera 
+                            style={styles.cameraBody}
+                            type={Camera.Constants.Type.back}
+                            ref={ reference => this.camera = reference}
                         />
-                        <TouchableOpacity  onPress={() => this.useCamera()}>
-                            <Text>Take Photo</Text>
+                        <TouchableOpacity 
+                            style={styles.buttonBlue1}
+                            onPress={()=>this.useCamera()}>
+                            <Text style={styles.big}>Sacar Foto</Text>
                         </TouchableOpacity>
-                    </View>
-                    
-                )}
-            </>
+                    </React.Fragment>
+                :
+                <Text style={styles.big}>No hay permisos para usar la cámara.</Text>
+            }
+        </React.Fragment>
         );
         
     }
 }
+const styles = StyleSheet.create({
+    cameraBody:{
+        flex:7
+    },
+   
+    buttonGrey: {
+        flex: 1,
+        backgroundColor: "grey",
+        paddingVertical: 6,
+        paddingHorizontal: 10,
+        fontSize: 20,
+        fontFamily: "arial",
+        textAlign: "center",
+        borderRadius: 10,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "black",
+    },
+    buttonBlue: {
+        flex: 1,
+        backgroundColor: "blue",
+        paddingVertical: 6,
+        paddingHorizontal: 10,
+        fontSize: 20,
+        fontFamily: "arial",
+        textAlign: "center",
+        borderRadius: 10,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "black",
+    },
+    buttonBlue1: {
+        flex: 0.5,
+        backgroundColor: "blue",
+        paddingVertical: 6,
+        paddingHorizontal: 10,
+        fontSize: 20,
+        fontFamily: "arial",
+        textAlign: "center",
+        borderRadius: 10,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "black",
+    },
+
+    preview:{
+        flex:7
+    },
+    actionArea:{
+        flex: 2,
+    },
+    big:{
+        textAlign:"center",
+        fontSize: 20,
+    }
+
+})
 
 export default Camara;
