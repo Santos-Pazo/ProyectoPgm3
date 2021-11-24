@@ -44,10 +44,12 @@ class Menu extends Component {
         
     }
  
-    register(email, pass){
+    register(email, pass, username){
         auth.createUserWithEmailAndPassword(email, pass)
         .then((response)=>{
-            // console.log(response);
+            auth.currentUser.updateProfile({
+                displayName: username
+            })
         })
         .catch( e => {
             console.log(e);
@@ -96,7 +98,7 @@ class Menu extends Component {
                 this.state.logueado == false ?
                 <NavigationContainer >
                     <Drawer.Navigator >
-                        <Drawer.Screen name="Register" component={() => <Register register={(email, pass )=> this.register(email, pass)} errorCode={this.state.errorCode} errorMessage={this.state.errorRegistro} />}/>
+                        <Drawer.Screen name="Register" component={() => <Register register={(email, pass, username )=> this.register(email, pass, username)} errorCode={this.state.errorCode} errorMessage={this.state.errorRegistro} />}/>
                         <Drawer.Screen name="Login" component={() => <Login login={(email, pass)=> this.login(email, pass)}  errorCode={this.state.errorCode} errorMessage={this.state.errorLogin} />} />
                     </Drawer.Navigator> 
                </NavigationContainer> :

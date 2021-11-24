@@ -32,7 +32,7 @@ class Login extends Component{
                     secureTextEntry={true}
                     onChangeText={(text)=> this.setState({password: text})}>
                </TextInput>
-               <TouchableOpacity onPress={() => this.props.login(this.state.email, this.state.password)} style={styles.boton}>
+               <TouchableOpacity onPress={() => this.props.login(this.state.email, this.state.password)} style={styles.boton}  disabled={this.state.email == '' || this.state.password == '' ? true:false}>
                    <Text> Login </Text>
                </TouchableOpacity>
  

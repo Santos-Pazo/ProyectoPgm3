@@ -17,26 +17,6 @@ class Register extends Component{
 
     
     
-        //  if(this.state.password = ""){
-        //     val ++;
-        // }
-        // if(this.state.mail = ""){
-        //     val ++;
-        // }
-        // if(this.state.userName = ""){
-        //     val ++;
-        // }
-        // if(val == 3){
-        //     this.setState({
-        //         disabled: true
-        //     })
-        // } else {
-        //     this.setState({
-        //         disabled: false
-        //     })
-        // }
-    
-    
  
     render(){
         return(
@@ -53,7 +33,7 @@ class Register extends Component{
                     style={styles.input}
                     keyboardType='default'
                     placeholder='username'
-                    onChangeText={(text)=> this.setState({userName: text})}>
+                    onChangeText={(text)=> this.setState({username: text})}>
                </TextInput>
                <TextInput
                     style={styles.input}
@@ -62,7 +42,8 @@ class Register extends Component{
                     secureTextEntry={true}
                     onChangeText={(text)=> this.setState({password: text})}>
                </TextInput>
-               <TouchableOpacity onPress={() => this.props.register(this.state.mail, this.state.password )}  style={styles.boton} disabled={this.state.disabled}>
+               <TouchableOpacity onPress={() => this.props.register(this.state.mail, this.state.password, this,state.username )}  style={styles.boton} 
+                disabled={this.state.mail == '' || this.state.username == '' || this.state.password == '' ? true:false}>
                    <Text> Register </Text>
                </TouchableOpacity>
                {/* <Text>{this.props.errorCode}</Text> */}

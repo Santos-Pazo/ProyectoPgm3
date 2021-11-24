@@ -13,15 +13,24 @@ class Post extends Component{
         }
     }
 
+    
+    borrar(){
+        db.collection('Posts').doc(this.props.data.id).delete()
+    }
+    
    
  
     render(){
         return(
             <React.Fragment>
-                <View style={styles.postConteiner}>
+                <View >
                     <Text >{this.props.data.data.post} </Text>
                     <Text >{this.props.data.data.owner}</Text>
                 </View>
+                {auth.currentUser.email == this.props.data.data.owner ? 
+                <TouchableOpacity onPress={()=> this.borrar()}> Borrar </TouchableOpacity> :
+                null}
+            
             </React.Fragment>
         )
     }

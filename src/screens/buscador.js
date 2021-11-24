@@ -49,12 +49,12 @@ class Buscador extends Component{
                </TouchableOpacity>
 
                <React.Fragment>
-                    {this.state.posts.length == "0" ?
-                        <Text>El usuario no existe o todavio no publico </Text> :
+                    {this.state.posts.length !== "0" ?
                         <FlatList 
                         data ={this.state.posts}
                         keyExtractor= {post => post.id}
-                        renderItem= {({item})=><Post data={item} />} />
+                        renderItem= {({item})=><Post data={item} />} /> :
+                        <Text>El usuario no existe o todavio no publico </Text>
                 
                     }
                </React.Fragment>
