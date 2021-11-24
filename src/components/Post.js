@@ -77,25 +77,26 @@ class Post extends Component{
         })
     }
 
-    // saveComment(){
-    //    console.log ('Save Comment')
-    //    let aComment ={
-    //        createdAt: Date.now (),
-    //        autor: auth.currentUser.displayName,
-    //        comments: this.state.comments
-    //    }
-    //    db.collection('Posts').doc(this.props.postData.id).update({
-    //     comment: firebase.firestore.FieldValue.arrayUnion(aComment)
-    //    })
-    //    .then(()=>{
-    //        this.setState({
-    //         comments: '',
-    //        })
-    //    })
-    // }
-    // deletePost (){
-    //     db.collection('Posts').doc(this.props.postData.id).delete()
-    // }
+     saveComment(){
+        console.log ('Save Comment')
+        let aComment ={
+            createdAt: Date.now (),
+            autor: auth.currentUser.displayName,
+            comments: this.state.comments
+        }
+        db.collection('Posts').doc(this.props.postData.id).update({
+         comment: firebase.firestore.FieldValue.arrayUnion(aComment)
+        })
+        .then(()=>{
+            this.setState({
+             comments: '',
+             commentList: this.props.postData.data.comment,
+            })
+        })
+     }
+     deletePost (){
+         db.collection('Posts').doc(this.props.postData.id).delete()
+     }
 
    
  
@@ -110,7 +111,7 @@ class Post extends Component{
                         source= {{uri: this.props.postData.data.picture}}
                     />
                     <Text>{this.props.postData.data.username}</Text>
-                    <Text >{this.state.meGustas} Like</Text>
+                    <Text >Likeado Por {this.state.meGustas}</Text>
                     <View>
                         {this.props.postData.data.owner == auth.currentUser.email ?
                             <TouchableOpacity onPress={() => this.borrar()}  >
