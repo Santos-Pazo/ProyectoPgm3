@@ -37,28 +37,35 @@ class Buscador extends Component{
  
     render(){
         return(
-           <View style={styles.formContainer}>
-               <TextInput
-                    style={styles.input}
-                    keyboardType='default'
-                    placeholder='Busca amigos aca...'
-                    onChangeText={(text)=> this.setState({search: text})}>
-               </TextInput>
-               <TouchableOpacity style={styles.boton} onPress={()=> this.buscador()}>
-                   <Text> Buscar </Text>
-               </TouchableOpacity>
+            <React.Fragment >
+                <View style={styles.formContainer}>
+                    <View style={styles.inputConteiner}>
+                        <TextInput
+                                style={styles.input}
+                                keyboardType='default'
+                                placeholder='Busca poosteos de amigos aca...'
+                                onChangeText={(text)=> this.setState({search: text})}>
+                        </TextInput>
+                    
+                        <TouchableOpacity style={styles.button} onPress={()=> this.buscador()}>
+                            <Text> Buscar </Text>
+                        </TouchableOpacity>
+                    </View>
+               </View>
 
                <React.Fragment>
-                    {this.state.posts.length !== "0" ?
+                    {this.state.posts.length == "0" ?
+                        <Text style={styles.alert}>El usuario no existe o todavio no publico </Text> :
                         <FlatList 
+                        style={styles.body}
                         data ={this.state.posts}
                         keyExtractor= {post => post.id}
-                        renderItem= {({item})=><Post data={item} />} /> :
-                        <Text>El usuario no existe o todavio no publico </Text>
+                        renderItem= {({item})=> <Post postData={item} />} />
                 
                     }
                </React.Fragment>
-           </View>
+            </React.Fragment>
+           
         )
     }
 }
@@ -66,9 +73,31 @@ class Buscador extends Component{
 
 
 const styles = StyleSheet.create({
+    body:{
+        backgroundColor: '#9BD7F7'
+    },
     formContainer:{
         paddingHorizontal:10,
         marginTop: 20,
+        flexWrap: 'wrap',
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    inputConteiner:{
+        width: 50,
+        display: 'flex',
+        flexDirection:' row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    button:{
+        marginHorizontal:20,
+        backgroundColor: '#DCB155',
+        paddingVertical: 6,
+        paddingHorizontal: 10,
+        alignContent: 'center',
+        borderWidth: 1
+
     },
     input:{
         height: 50,
@@ -80,13 +109,10 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         marginVertical:10,
     },
-    boton:{
-        backgroundColor: '#28a745',
-        paddingVertical: 6,
-        paddingHorizontal: 10,
-        alignContent: 'center',
-        borderWidth: 1
+    alert:{
+        color: '#D31B12'
     }
+    
 })
  
  

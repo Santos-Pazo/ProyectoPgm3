@@ -14,7 +14,8 @@ class Post extends Component{
             myLike: false,
             showModal: false,
             comment: '',
-            commentList: null
+            commentList: null,
+            
         }
     }
 
@@ -77,19 +78,19 @@ class Post extends Component{
         })
     }
 
-     saveComment(){
+    saveComment(){
         console.log ('Save Comment')
         let aComment ={
             createdAt: Date.now (),
             autor: auth.currentUser.displayName,
-            comments: this.state.comments
+            comments: this.state.comment
         }
         db.collection('Posts').doc(this.props.postData.id).update({
          comment: firebase.firestore.FieldValue.arrayUnion(aComment)
         })
         .then(()=>{
             this.setState({
-             comments: '',
+             comment: '',
              commentList: this.props.postData.data.comment,
             })
         })
@@ -103,24 +104,28 @@ class Post extends Component{
     render(){
         return(
                 <View style={styles.postConteiner}>
-                    <Text > {this.props.postData.data.owner} </Text>  
-                    <Text >El posteo fue creado el: {this.props.postData.data.createdAt}</Text> 
-                    <Text > {this.props.postData.data.post} </Text> 
+                    
                     <Image
                         style={{width: '100%', height: 250, borderRadius: '10px',}}
                         source= {{uri: this.props.postData.data.picture}}
                     />
-                    <Text>{this.props.postData.data.username}</Text>
+                    <Text > {this.props.postData.data.owner} </Text>  
+                    <Text >El posteo fue creado el: {this.props.postData.data.createdAt}</Text> 
+                    <Text > {this.props.postData.data.post} </Text> 
                     <Text >Likeado Por {this.state.meGustas}</Text>
-                    <View>
-                        {this.props.postData.data.owner == auth.currentUser.email ?
+                    <View >
+                        {this.props.postData.data.owner == auth.currentUser.displayName ?
                             <TouchableOpacity onPress={() => this.borrar()}  >
                                 <Text>  Borrar </Text>
                             </TouchableOpacity> 
                         : null}
-                        <TouchableOpacity onPress={()=>this.openModal()}>
+                     </View>
+                     <View style={styles.postDescription}>
+                        <TouchableOpacity onPress={()=>this.openModal()} >
                             <Text> Comentar</Text>
                         </TouchableOpacity>
+                    </View>
+                    <View style={styles.postDescription}>
                         { this.state.myLike ?
                             <TouchableOpacity onPress={() => this.dislikePost()}>
                                 <Text> Quitar like</Text>
@@ -131,7 +136,6 @@ class Post extends Component{
                             </TouchableOpacity>
                         }
                     </View>
-
                     { ! this.state.showModal ?
                        null
                         :
@@ -164,13 +168,13 @@ class Post extends Component{
                             placeholder="Comentar"
                             keyboardType="default"
                             multiline
-                            value={this.state.comments}
-                            onChangeText={texto => this.setState({comments: texto})}
+                            value={this.state.comment}
+                            onChangeText={texto => this.setState({comment: texto})}
                             
                         />
                         <TouchableOpacity 
                             onPress={()=>{this.saveComment()}} 
-                            disabled={this.state.comments == '' ? true:false}>
+                            disabled={this.state.comment == '' ? true:false}>
                             <Text >Save Comment</Text>
                         </TouchableOpacity>
                     </View>
@@ -187,12 +191,12 @@ const styles = StyleSheet.create({
     postConteiner:{
         borderBottomWidth: 3,
         borderRightWidth: 3,
-        
+        marginHorizontal: 50,
         flexWrap: 'wrap',
         justifyContent: 'space-around',
         marginTop: 50,
         alignItems: 'center',
-        backgroundColor: '#13E0F0',
+        backgroundColor: '#C297DD',
         padding: 30
     },
     postFoto:{
@@ -201,19 +205,18 @@ const styles = StyleSheet.create({
     postComment:{
 
     },
-    postDescription:{
-    backgroundColor: "#fxe59a",
-    backgroundColor: "#fxe59a",
+    postDescription:{    
     paddingHorizontal: 12,
     paddingVertical: 4,
     textAlign: "center",
     borderRadius: 8,
     borderWidth: 1,
     borderStyle: "solid",
-    backgroundColor: "#fxe59a",
+    backgroundColor: "#DCB155",
     borderColor: "#fxe59a"
 
-    }
+    },
+    
 })
 
  
