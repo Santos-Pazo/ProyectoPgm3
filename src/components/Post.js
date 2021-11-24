@@ -10,8 +10,8 @@ class Post extends Component{
     constructor(props){
         super(props)
         this.state ={
-            meGusta: 0,
-            gustado: false,
+            meGustas: 0,
+            myLike: false,
             showModal: false,
             comment: '',
             commentList: null
@@ -19,11 +19,10 @@ class Post extends Component{
     }
 
     componentDidMount(){
-
-        if(this. props.postData.data.meGusta){
+        if(this.props.postData.data.meGustas){
            this.setState({
-            meGusta:this.props.postData.data.meGusta.length,
-            gustado: this.props.postData.data.meGusta.includes(auth.currentUser.email),  
+            meGustas:this.props.postData.data.meGustas.length,
+            myLike: this.props.postData.data.meGustas.includes(auth.currentUser.email),  
        })
    } 
        if(this.props.postData.data.comment){
@@ -36,128 +35,111 @@ class Post extends Component{
 
 
     likePost() {
-        let post = db.collection("posteos").doc(this.props.postData.id);
+        let posteos = db.collection("posteos").doc(this.props.postData.id);
 
-        post.update({
-            meGusta: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
+        posteos.update({
+            meGustas: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
         })
         .then(() => {
             this.setState({
-                meGusta: this.state.meGusta +1,
-                gustado: true,
+                meGustas: this.props.postData.data.meGustas.length,
+                myLike: true,
             })
-            console.log('liked');
+            console.log('likeado');
         })
         .catch((error) => {
-           console.error("Error subiendo el archivo: ", error); 
+           console.error("Error: ", error); 
         })
     }
 
     dislikePost() {
-        let post = db.collection("posts").doc(this.props.postData.id);
+        let post = db.collection("Posts").doc(this.props.postData.id);
 
         post.update({
-            meGusta: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
+            meGustas: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
         })
         .then(() => {
             this.setState({
-                meGusta: this.state.meGusta - 1,
-                gustado: false,
+                meGustas: this.state.meGustas - 1,
+                myLike: false,
             })
             console.log('disliked');
         })
         .catch((error) => {
-           console.error("Filing error: ", error);
+           console.error("Error: ", error);
        });
     }
 
     openModal() {
-        this.setState({
+         this.setState({
             showModal: true,
         })
-    }
+     }
 
-    closeModal() {
-        this.setState({
-            showModal: false,
-        })
-    }
+     closeModal() {
+         this.setState({
+             showModal: false,
+         })
+     }
 
-    saveComment(){
-       console.log ('Save Comment')
-       let aComment ={
-           createdAt: Date.now (),
-           autor: auth.currentUser.displayName,
-           comments: this.state.comments
-       }
-       db.collection('posts').doc(this.props.postData.id).update({
-        comment: firebase.firestore.FieldValue.arrayUnion(aComment)
-       })
-       .then(()=>{
-           this.setState({
-            comments: '',
-               commentList: this.props.postData.data.comment,
-           })
-       })
-    }
-    deletePost (){
-        db.collection('posts').doc(this.props.postData.id).delete()
+    // saveComment(){
+    //    console.log ('Save Comment')
+    //    let aComment ={
+    //        createdAt: Date.now (),
+    //        autor: auth.currentUser.displayName,
+    //        comments: this.state.comments
+    //    }
+    //    db.collection('Posts').doc(this.props.postData.id).update({
+    //     comment: firebase.firestore.FieldValue.arrayUnion(aComment)
+    //    })
+    //    .then(()=>{
+    //        this.setState({
+    //         comments: '',
+    //            commentList: this.props.postData.data.comment,
+    //        })
+    //    })
+    // }
+    borrar(){
+        db.collection('Posts').doc(this.props.postData.id).delete()
     }
 
    
  
     render(){
         return(
-                 <View style={styles.postContainer}>
-             <Text > {this.props.postData.data.owner} </Text>  
-             <Text >El posteo fue creado el: 
-                {this.props.postData.data.createdAt}</Text> 
-            <Text > {this.props.postData.data.post} </Text> 
-           
-                <Image
-                    style={{width: '100%', height: 250, borderRadius: '10px',}}
-                    source= {{uri: this.props.postData.data.picture}}
-                />
-                <Text>{this.props.postData.data.username}</Text>
-                <Text >{this.props.postData.data.estado}</Text>
-                <TouchableOpacity onPress={() => this.openModal()}>
-                    <Text >{this.state.likes} Like</Text>
-                </TouchableOpacity>
-
-                <View>
-
-                {this.props.postData.data.owner == auth.currentUser.displayName ?
-               <TouchableOpacity onPress={() => this.deletePost()}  >
-               <Text >  
-                   
-               </Text>
-           </TouchableOpacity> 
-            : null}
-
-            <TouchableOpacity onPress={()=>this.openModal()}>
-                <Text>
-                
-                </Text>
-            </TouchableOpacity>
-                {
-                    ! this.state.liked ?
-                        <TouchableOpacity 
-                        onPress={() => this.likePost()}>
-                            <Text > 
-                                
-                            </Text>
+                <View style={styles.postContainer}>
+                    <Text > {this.props.postData.data.owner} </Text>  
+                    <Text >El posteo fue creado el: {this.props.postData.data.createdAt}</Text> 
+                    <Text > {this.props.postData.data.post} </Text> 
+                    <Image
+                        style={{width: '100%', height: 250, borderRadius: '10px',}}
+                        source= {{uri: this.props.postData.data.picture}}
+                    />
+                    <Text>{this.props.postData.data.username}</Text>
+                    <TouchableOpacity onPress={() => this.openModal()}>
+                        <Text >{this.state.meGustas} Like</Text>
+                    </TouchableOpacity>
+                    <View>
+                        {this.props.postData.data.owner == auth.currentUser.email ?
+                            <TouchableOpacity onPress={() => this.borrar()}  >
+                                <Text>  Borrar </Text>
+                            </TouchableOpacity> 
+                        : null}
+                        <TouchableOpacity onPress={()=>this.openModal()}>
+                            <Text> </Text>
                         </TouchableOpacity>
+                        { this.state.liked ?
+                            <TouchableOpacity onPress={() => this.dislikePost()}>
+                                <Text> Quitar like</Text>
+                            </TouchableOpacity>
                         :
-                        <TouchableOpacity  
-                        onPress={() => this.dislikePost()}>
-                            <Text> 
-                               
-                            </Text>
-                        </TouchableOpacity>
-                }
-                </View>
+                            <TouchableOpacity onPress={() => this.likePost()}>
+                                <Text> Me gusta</Text>
+                            </TouchableOpacity>
+                        }
+                    </View>
 
-                { ! this.state.showModal ?
+                    {/* { ! this.state.showModal ?
                        null
                         :
                             <Modal
@@ -202,7 +184,7 @@ class Post extends Component{
                             </Modal>
                            
                 }
-                
+                 */}
             </View>
         )
     }

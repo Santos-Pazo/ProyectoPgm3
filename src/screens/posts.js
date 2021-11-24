@@ -14,7 +14,6 @@ class Posts extends Component{
         this.state ={
             post: '',
             foto: '',
-            estado: '',
             displayCamera: true,
             comentario: '',
             
@@ -31,7 +30,6 @@ class Posts extends Component{
         .then( ()=> {
             this.setState({
                 post: '',
-                estado: '',
                 displayCamera: true,
 
             })

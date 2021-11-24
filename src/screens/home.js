@@ -60,11 +60,11 @@ class Home extends Component{
 const styles = StyleSheet.create({
         bodyArriba:{
             flex: 1,
-            backgroundColor: '#F02BA0'
+            backgroundColor: '#46E1DE'
         },
         bodyAbajo:{
             flex: 8,
-            backgroundColor: '#F0E074'
+            backgroundColor: '#E8F6F6'
         }
 
 })
