@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Text, TouchableOpacity, View, ActivityIndicator, Image, FlatList, TextInput} from 'react-native';
 import {StyleSheet} from 'react-native';
 
-let val = 0;
 
 class Register extends Component{
     constructor(props){
@@ -42,7 +41,7 @@ class Register extends Component{
                     secureTextEntry={true}
                     onChangeText={(text)=> this.setState({password: text})}>
                </TextInput>
-               <TouchableOpacity onPress={() => this.props.register(this.state.mail, this.state.password, this,state.username )}  style={styles.boton} 
+               <TouchableOpacity onPress={() => this.props.register(this.state.mail, this.state.password, this.state.username )}  style={styles.boton} 
                 disabled={this.state.mail == '' || this.state.username == '' || this.state.password == '' ? true:false}>
                    <Text> Register </Text>
                </TouchableOpacity>
