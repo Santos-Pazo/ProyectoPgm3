@@ -101,7 +101,7 @@ class Post extends Component{
  
     render(){
         return(
-                <View>
+                <View style={styles.postConteiner}>
                     <Text > {this.props.postData.data.owner} </Text>  
                     <Text >El posteo fue creado el: {this.props.postData.data.createdAt}</Text> 
                     <Text > {this.props.postData.data.post} </Text> 
@@ -110,9 +110,7 @@ class Post extends Component{
                         source= {{uri: this.props.postData.data.picture}}
                     />
                     <Text>{this.props.postData.data.username}</Text>
-                    <TouchableOpacity onPress={() => this.openModal()}>
-                        <Text >{this.state.meGustas} Like</Text>
-                    </TouchableOpacity>
+                    <Text >{this.state.meGustas} Like</Text>
                     <View>
                         {this.props.postData.data.owner == auth.currentUser.email ?
                             <TouchableOpacity onPress={() => this.borrar()}  >
@@ -122,7 +120,7 @@ class Post extends Component{
                         <TouchableOpacity onPress={()=>this.openModal()}>
                             <Text> </Text>
                         </TouchableOpacity>
-                        { this.state.liked ?
+                        { this.state.myLike ?
                             <TouchableOpacity onPress={() => this.dislikePost()}>
                                 <Text> Quitar like</Text>
                             </TouchableOpacity>
