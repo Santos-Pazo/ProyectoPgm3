@@ -190,7 +190,7 @@ class Post extends Component{
                         <TouchableOpacity 
                             onPress={()=>{this.saveComment()}} 
                             disabled={this.state.comments == '' ? true:false}>
-                            <Text >Guadar comentario</Text>
+                            <Text >Save Comment</Text>
                         </TouchableOpacity>
                     </View>
                             </Modal>
