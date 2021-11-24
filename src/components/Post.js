@@ -25,17 +25,12 @@ class Post extends Component{
             myLike: this.props.postData.data.meGustas.includes(auth.currentUser.email),  
        })
    } 
-       if(this.props.postData.data.comment){
-           this.setState({
-               commentList:this.props.postData.data.comment,
-           })
-       }
 }
     
 
 
     likePost() {
-        let posteos = db.collection("posteos").doc(this.props.postData.id);
+        let posteos = db.collection("Posts").doc(this.props.postData.id);
 
         posteos.update({
             meGustas: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
@@ -60,7 +55,7 @@ class Post extends Component{
         })
         .then(() => {
             this.setState({
-                meGustas: this.state.meGustas - 1,
+                meGustas: this.props.postData.data.meGustas.length,
                 myLike: false,
             })
             console.log('disliked');
@@ -74,13 +69,13 @@ class Post extends Component{
          this.setState({
             showModal: true,
         })
-     }
+    }
 
-     closeModal() {
-         this.setState({
-             showModal: false,
-         })
-     }
+    closeModal() {
+        this.setState({
+            showModal: false,
+        })
+    }
 
     // saveComment(){
     //    console.log ('Save Comment')
@@ -95,19 +90,18 @@ class Post extends Component{
     //    .then(()=>{
     //        this.setState({
     //         comments: '',
-    //            commentList: this.props.postData.data.comment,
     //        })
     //    })
     // }
-    borrar(){
-        db.collection('Posts').doc(this.props.postData.id).delete()
-    }
+    // deletePost (){
+    //     db.collection('Posts').doc(this.props.postData.id).delete()
+    // }
 
    
  
     render(){
         return(
-                <View style={styles.postContainer}>
+                <View>
                     <Text > {this.props.postData.data.owner} </Text>  
                     <Text >El posteo fue creado el: {this.props.postData.data.createdAt}</Text> 
                     <Text > {this.props.postData.data.post} </Text> 
@@ -172,7 +166,7 @@ class Post extends Component{
                             keyboardType="default"
                             multiline
                             value={this.state.comments}
-                            onChangeText={texto => this.setState({comentarios: texto})}
+                            onChangeText={texto => this.setState({comments: texto})}
                             
                         />
                         <TouchableOpacity 
