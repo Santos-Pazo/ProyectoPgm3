@@ -74,7 +74,7 @@ class Profile extends Component{
                         <TouchableOpacity onPress={()=> this.mostrarInfo()}>
                             <Text style={styles.button}>Mostrar Info</Text>
                         </TouchableOpacity>
-                        }
+                        
                     </View>
                     
                 </View>
