@@ -184,7 +184,6 @@ const styles = StyleSheet.create({
         borderBottomWidth: 3,
         borderRightWidth: 3,
         marginHorizontal: 50,
-        flexWrap: 'wrap',
         justifyContent: 'space-around',
         marginTop: 50,
         alignItems: 'center',

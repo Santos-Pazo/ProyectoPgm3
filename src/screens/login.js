@@ -37,11 +37,7 @@ class Login extends Component{
                </TouchableOpacity>
  
                {/* <Text>{this.props.errorCode}</Text> */}
-               <Text>{this.props.errorMessage}</Text>
-               
-               
-               
-               
+               <Text>{this.props.errorMessage}</Text> 
            </View>
         )
     }
@@ -50,7 +46,8 @@ class Login extends Component{
 const styles = StyleSheet.create({
     formContainer:{
         paddingHorizontal:10,
-        marginTop: 20,
+        backgroundColor: '#372441',
+        flex: 1
     },
     input:{
         height:50,
@@ -63,11 +60,15 @@ const styles = StyleSheet.create({
         marginVertical:10,
     },
     boton:{
-        backgroundColor: '#28a745',
-        paddingVertical: 6,
-        paddingHorizontal: 10,
-        alignContent: 'center',
-        borderWidth: 1
+        paddingHorizontal: 12,
+        paddingVertical: 4,
+        textAlign: "center",
+        borderRadius: 8,
+        borderWidth: 1,
+        borderStyle: "solid",
+        backgroundColor: "#DCB155",
+        borderColor: "#fxe59a",
+        marginHorizontal: 3
     }
 })
  

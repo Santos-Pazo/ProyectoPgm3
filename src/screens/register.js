@@ -59,7 +59,8 @@ class Register extends Component{
 const styles = StyleSheet.create({
     formContainer:{
         paddingHorizontal:10,
-        marginTop: 20,
+        backgroundColor: '#372441',
+        flex: 1
     },
     input:{
         height:50,
@@ -68,15 +69,20 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderColor: '#ccc',
         borderStyle: 'solid',
+        backgroundColor:'rgba(131, 43, 247, 0.54)',
         borderRadius: 6,
         marginVertical:10,
     },
     boton:{
-        backgroundColor: '#28a745',
-        paddingVertical: 6,
-        paddingHorizontal: 10,
-        alignContent: 'center',
-        borderWidth: 1
+        paddingHorizontal: 12,
+        paddingVertical: 4,
+        textAlign: "center",
+        borderRadius: 8,
+        borderWidth: 1,
+        borderStyle: "solid",
+        backgroundColor: "#DCB155",
+        borderColor: "#fxe59a",
+        marginHorizontal: 3
     }
 })
  
