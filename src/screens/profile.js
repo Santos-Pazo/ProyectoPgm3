@@ -1,19 +1,19 @@
 import React, {Component} from 'react';
-import {Text, TouchableOpacity, View, ActivityIndicator, Image, FlatList, TextInput} from 'react-native';
+import {Text, TouchableOpacity, View, ActivityIndicator, Image, FlatList, TextInput, Modal, Alert} from 'react-native';
 import {StyleSheet} from 'react-native';
 import {auth, db} from '../firebase/config';
 import Post from '../components/Post';
 
- 
 class Profile extends Component{
     constructor(props){
         super(props)
         this.state ={
             posts: [],
-            deletePost: ''
+            deletePost: '',
+            mostrar: false
         }
     }
-
+    
     
     componentDidMount(){
         db.collection('Posts')
@@ -37,20 +37,50 @@ class Profile extends Component{
         )
     }
 
+    mostrarInfo(){
+        this.setState({
+            mostrar: true
+        })
+    }
+    cerrarInfo(){
+        this.setState({
+            mostrar: false
+        })
+    }
     
     render(){
         return(
             <React.Fragment >
                 <View style={styles.bodyArriba}>
-                    <Text>My profile</Text>
-                    <Text> {auth.currentUser.displayName} </Text>
-                    <Text>Email del usuario: {auth.currentUser.email}</Text>
-                    <Text>Fecha de creación: {auth.currentUser.metadata.creationTime}</Text>
-                    <Text>Ultima conexión: {auth.currentUser.metadata.lastSignInTime}</Text>
-                    <TouchableOpacity onPress={() => this.props.logout()} style={styles.boton}>
-                        <Text> Logout</Text>
-                    </TouchableOpacity>
-                    <Text>{this.state.posts.length} </Text>
+                <View stayle={styles.botonConteiner}>                    
+                        <TouchableOpacity onPress={() => this.props.logout()} style={styles.boton}>
+                            <Text> Logout</Text>
+                        </TouchableOpacity>
+                    </View>
+                    
+                    <Text style={styles.bienvenido} >Bienvenido a tu perfil {auth.currentUser.displayName} </Text>
+                    <View style={styles.modalConteiner}>
+                        {this.state.mostrar == true ?
+                            <Modal
+                                animationType="slide"
+                                transparent={true}
+                                visible={this.state.mostrar}
+                            >
+                                
+                                <Text>Email del usuario: {auth.currentUser.email}</Text>
+                                <Text>Fecha de creación: {auth.currentUser.metadata.creationTime}</Text>
+                                <Text>Ultima conexión: {auth.currentUser.metadata.lastSignInTime}</Text>    
+                                <Text>Cantidad de posts: {this.state.posts.length} </Text>
+                                <TouchableOpacity onPress={()=> this.cerrarInfo()} >
+                                    <Text style={styles.button}> Cerrar </Text> 
+                                </TouchableOpacity>
+                            </Modal> :
+                        <TouchableOpacity onPress={()=> this.mostrarInfo()}>
+                            <Text style={styles.button}>Mostrar Info</Text>
+                        </TouchableOpacity>
+                        }
+                    </View>
+                    
                 </View>
                 <View  style={styles.bodyAbajo}>
                     <FlatList 
@@ -68,21 +98,44 @@ class Profile extends Component{
 const styles = StyleSheet.create({
    
     boton:{
-        backgroundColor: '#28a745',
+        backgroundColor: 'red',
         paddingVertical: 6,
         paddingHorizontal: 10,
         alignContent: 'center',
-        borderWidth: 1
+        borderWidth: 1,
+        marginRight: 300,
+        justifyContent: 'center'
+    },
+    button:{
+        backgroundColor: '#E0BB6A',
+        paddingVertical: 6,
+        paddingHorizontal: 10,
+        alignContent: 'center',
+        borderWidth: 1,
+        marginRight: 300,
+        justifyContent: 'center'
     },
     bodyAbajo:{
-        flex: 5,
-        backgroundColor: '#F0E074'
+        flex: 10,
+        backgroundColor: '#372441'
     },
     bodyArriba:{
-        flex: 2,
-        backgroundColor: '#F02BA0'
+        flexWrap:'wrap',
+        flex: 4,
+        backgroundColor: 'rgba(131, 43, 247, 0.30)',
+        flexDirection:'column'
     },
-    
+    botonConteiner:{
+        flexWrap:'wrap',
+        margin: 5
+    },
+    modalConteiner:{
+        marginTop: 10,
+        
+    },
+    bienvenido:{
+        marginTop: 10,
+    }
 })
  
 export default Profile
