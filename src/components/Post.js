@@ -160,7 +160,7 @@ class Post extends Component{
                                         keyExtractor={(comments) => comments.createdAt.toString ()}
                                         renderItem={ ({item})=> <Text style={{color: 'white'}} > {item.autor}: {item.comments}</Text> }
                                         /> :
-                                        <Text style={{fontSize: 18, color: 'white'}}>No Comments</Text>
+                                        <Text style={{fontSize: 18, color: 'white'}}>No Hay Comentarios</Text>
                                         }
                                         <View>
                                             <TextInput 
@@ -175,7 +175,7 @@ class Post extends Component{
                                             <TouchableOpacity 
                                                 onPress={()=>{this.saveComment()}} 
                                                 disabled={this.state.comment == '' ? true:false}>
-                                                <Text style={{color: 'white'}}>Save Comment</Text>
+                                                <Text style={styles.submit}>Postear Comentario</Text>
                                             </TouchableOpacity>
                                         </View>
                                 </View>
