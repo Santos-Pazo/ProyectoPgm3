@@ -20,7 +20,7 @@ class Register extends Component{
     render(){
         return(
            <View style={styles.formContainer}>
-               <Text> Register </Text>
+               <Text style={{color: 'white'}}> Register </Text>
                <TextInput
                     style={styles.input}
                     keyboardType='email-address'
@@ -43,7 +43,7 @@ class Register extends Component{
                </TextInput>
                <TouchableOpacity onPress={() => this.props.register(this.state.mail, this.state.password, this.state.username )}  style={styles.boton} 
                 disabled={this.state.mail == '' || this.state.username == '' || this.state.password == '' ? true:false}>
-                   <Text> Register </Text>
+                   <Text style={{color: 'white'}}> Register </Text>
                </TouchableOpacity>
                {/* <Text>{this.props.errorCode}</Text> */}
                

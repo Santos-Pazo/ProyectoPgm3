@@ -137,26 +137,34 @@ class Post extends Component{
                             }
                         </View>
                     </View>
-                    { ! this.state.showModal ? null :
-                        <Modal 
-                            visible={this.state.showModal}
-                            animationType="slide"
-                            transparent={false}
-                        >
+                    { ! this.state.showModal ?
+                       null
+                        :
+                            <Modal 
+                                visible={this.state.showModal}
+                                animationType="slide"
+                                transparent={false}
+                                >
+                                    <View style={{backgroundColor: '#8E05A3', flex: 1}}>
 
-                            <TouchableOpacity onPress= {() => this.closeModal()}>
-                                <Text>Cerrar</Text>
-                            </TouchableOpacity>
-                            {this.state.commentList ?
-                                <FlatList style={{backgroundColor:'cyan'}}
-                                    data={this.state.commentList}
-                                    keyExtractor={(comments) => comments.createdAt.toString ()}
-                                    renderItem={ ({item})=> <Text> {item.autor}: {item.comments}</Text> }
-                                    /> :
-                                    <Text style={{backgroundColor:'#DCB155', fontSize: 18}}>No Comments</Text>
+                                    <TouchableOpacity onPress= {() => this.closeModal()}>
+                                        <Text style={{color: 'white'}}>X</Text>
+                                    </TouchableOpacity>
+                                    
+                                
+                                    {
+                                this.state.commentList ?
+                                
+                                    <FlatList style={{backgroundColor:'#8E05A3'}}
+                                data={this.state.commentList}
+                                keyExtractor={(comments) => comments.createdAt.toString ()}
+                                renderItem={ ({item})=> <Text style={{color: 'white'}} > {item.autor}: {item.comments}</Text> }
+                                /> :
+                                <Text style={{fontSize: 18, color: 'white'}}>No Comments</Text>
                             }
                              <View>
                         <TextInput 
+                            style={{color: 'white'}}
                             placeholder="Comentar"
                             keyboardType="default"
                             multiline
@@ -167,8 +175,9 @@ class Post extends Component{
                         <TouchableOpacity 
                             onPress={()=>{this.saveComment()}} 
                             disabled={this.state.comment == '' ? true:false}>
-                            <Text >Save Comment</Text>
+                            <Text style={{color: 'white'}}>Save Comment</Text>
                         </TouchableOpacity>
+                    </View>
                     </View>
                             </Modal>
                            
@@ -189,9 +198,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'rgba(214, 184, 233, 0.29)',
         padding: 30
-    },
-    postFoto:{
-
     },
     postComment:{ 
         fontSize: 14,
