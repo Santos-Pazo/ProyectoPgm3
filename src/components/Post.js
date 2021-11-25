@@ -143,6 +143,7 @@ class Post extends Component{
                                 animationType="slide"
                                 transparent={false}
                                 >
+                                    <View style={{backgroundColor: 'rgba(214, 184, 233, 0.29)'}}>
 
                                     <TouchableOpacity onPress= {() => this.closeModal()}>
                                         <Text>X</Text>
@@ -176,6 +177,7 @@ class Post extends Component{
                             disabled={this.state.comment == '' ? true:false}>
                             <Text >Save Comment</Text>
                         </TouchableOpacity>
+                    </View>
                     </View>
                             </Modal>
                            
