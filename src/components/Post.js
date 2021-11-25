@@ -164,7 +164,7 @@ class Post extends Component{
                                         }
                                         <View>
                                             <TextInput 
-                                                style={{color: 'white'}}
+                                                style={styles.input}
                                                 placeholder="Comentar"
                                                 keyboardType="default"
                                                 multiline

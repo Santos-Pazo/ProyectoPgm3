@@ -105,8 +105,8 @@ class Menu extends Component {
                <NavigationContainer style={styles.navegacion} >
                     <Drawer.Navigator style={styles.navegacion}>
                         <Drawer.Screen name="Home" component={() => <Home/>} />
-                        <Drawer.Screen name="Profile" component={() => <Profile logout={()=> this.logout()} userData={this.state.userData} />} />   
-                        <Drawer.Screen name="Posts" component={(drawerProps) => <Posts drawerProps={drawerProps} />} />      
+                        <Drawer.Screen name="Perfil" component={() => <Profile logout={()=> this.logout()} userData={this.state.userData} />} />   
+                        <Drawer.Screen name="Nuevo Post" component={(drawerProps) => <Posts drawerProps={drawerProps} />} />      
                         <Drawer.Screen name="Buscador" component={() => <Buscador/>} />       
                     </Drawer.Navigator>      
                </NavigationContainer>
