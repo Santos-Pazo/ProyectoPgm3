@@ -10,14 +10,14 @@ class Profile extends Component{
         this.state ={
             posts: [],
             deletePost: '',
-           
+            mostrar: false
         }
     }
     
     
     componentDidMount(){
         db.collection('Posts')
-        .where("owner","==", auth.currentUser.displayName)
+        .where("owner","==", auth.currentUser.email)
         .onSnapshot(
             docs => {
                 let posteos = [];
@@ -27,6 +27,8 @@ class Profile extends Component{
                         data: doc.data()
                     })
                 })
+                
+
                 this.setState({
                     posts: posteos,
                 })
@@ -35,29 +37,53 @@ class Profile extends Component{
         )
     }
 
-    
+    mostrarInfo(){
+        this.setState({
+            mostrar: true
+        })
+    }
+    cerrarInfo(){
+        this.setState({
+            mostrar: false
+        })
+    }
     
     render(){
         return(
             <React.Fragment >
                 <View style={styles.bodyArriba}>
-                    <View stayle={styles.botonConteiner}>                    
+                <View stayle={styles.botonConteiner}>                    
                         <TouchableOpacity onPress={() => this.props.logout()} style={styles.boton}>
                             <Text> Logout</Text>
                         </TouchableOpacity>
                     </View>
-                    <Text style={styles.bienvenido} >Bienvenido a tu perfil {auth.currentUser.displayName} </Text>  
-                    <Text>Email del usuario: {auth.currentUser.email}</Text>
-                    <Text>Fecha de creación: {auth.currentUser.metadata.creationTime}</Text>
-                    <Text>Ultima conexión: {auth.currentUser.metadata.lastSignInTime}</Text>    
-                    <Text>Cantidad de posts: {this.state.posts.length} </Text>
+                    
+                    <Text style={styles.bienvenido} >Bienvenido a tu perfil {auth.currentUser.displayName} </Text>
+                    <View style={styles.modalConteiner}>
+                        
+                                
+                                
+                                <Text>Email del usuario: {auth.currentUser.email}</Text>
+                                <Text>Fecha de creación: {auth.currentUser.metadata.creationTime}</Text>
+                                <Text>Ultima conexión: {auth.currentUser.metadata.lastSignInTime}</Text>    
+                                <Text>Cantidad de posts: {this.state.posts.length} </Text>
+                                <TouchableOpacity onPress={()=> this.cerrarInfo()} >
+                                    <Text style={styles.button}> Cerrar </Text> 
+                                </TouchableOpacity>
+
+                        <TouchableOpacity onPress={()=> this.mostrarInfo()}>
+                            <Text style={styles.button}>Mostrar Info</Text>
+                        </TouchableOpacity>
+                        
+                    </View>
+                    
                 </View>
                 <View  style={styles.bodyAbajo}>
                     <FlatList 
                            
                             data ={this.state.posts}
                             keyExtractor= {post => post.id}
-                            renderItem= {({item})=> <Post postData={item} />}
+                            renderItem= {({item})=> <Post data={item} />}
                         />
                 </View>
            </React.Fragment>
