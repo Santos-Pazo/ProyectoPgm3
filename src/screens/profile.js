@@ -52,7 +52,7 @@ class Profile extends Component{
         return(
             <React.Fragment >
                 <View style={styles.bodyArriba}>
-                <View stayle={styles.botonConteiner}>                    
+                    <View stayle={styles.botonConteiner}>                    
                         <TouchableOpacity onPress={() => this.props.logout()} style={styles.boton}>
                             <Text> Logout</Text>
                         </TouchableOpacity>
@@ -60,12 +60,8 @@ class Profile extends Component{
                     
                     <Text style={styles.bienvenido} >Bienvenido a tu perfil {auth.currentUser.displayName} </Text>
                     <View style={styles.modalConteiner}>
-                        {this.state.mostrar == true ?
-                            <Modal
-                                animationType="slide"
-                                transparent={true}
-                                visible={this.state.mostrar}
-                            >
+                        
+                            
                                 
                                 <Text>Email del usuario: {auth.currentUser.email}</Text>
                                 <Text>Fecha de creación: {auth.currentUser.metadata.creationTime}</Text>
@@ -74,7 +70,7 @@ class Profile extends Component{
                                 <TouchableOpacity onPress={()=> this.cerrarInfo()} >
                                     <Text style={styles.button}> Cerrar </Text> 
                                 </TouchableOpacity>
-                            </Modal> :
+                           
                         <TouchableOpacity onPress={()=> this.mostrarInfo()}>
                             <Text style={styles.button}>Mostrar Info</Text>
                         </TouchableOpacity>

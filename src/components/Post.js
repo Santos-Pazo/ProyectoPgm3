@@ -112,57 +112,50 @@ class Post extends Component{
                     <Text style={styles.author}>Posted By: {this.props.postData.data.owner} </Text>  
                     <Text style={styles.description}> {this.props.postData.data.post} </Text> 
                     <Text style={styles.infoText} >Likeado Por {this.state.meGustas}</Text>
-                    <View >
-                        {this.props.postData.data.owner == auth.currentUser.displayName ?
-                            <TouchableOpacity onPress={() => this.deletePost()}  >
-                                <Text style={styles.out}>  Borrar </Text>
-                            </TouchableOpacity> 
-                        : null}
-                     </View>
-                     <View style={styles.postDescription}>
-                        <TouchableOpacity onPress={()=>this.openModal()} >
-                            <Text> Comentar</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.postDescription}>
-                        { this.state.myLike ?
-                            <TouchableOpacity onPress={() => this.dislikePost()}>
-                                <Text> Quitar like</Text>
+                    <View style={styles.contenedorBotones}>
+                        <View >
+                            {this.props.postData.data.owner == auth.currentUser.displayName ?
+                                <TouchableOpacity onPress={() => this.deletePost()}  >
+                                    <Text style={styles.out}>  Borrar </Text>
+                                </TouchableOpacity> 
+                            : null}
+                        </View>
+                        <View style={styles.postDescription}>
+                            <TouchableOpacity onPress={()=>this.openModal()} >
+                                <Text> Comentar</Text>
                             </TouchableOpacity>
-                        :
-                            <TouchableOpacity onPress={() => this.likePost()}>
-                                <Text> Me gusta</Text>
-                            </TouchableOpacity>
-                        }
-                    </View>
-                    { ! this.state.showModal ?
-                       null
-                        :
-                            <Modal 
-                                visible={this.state.showModal}
-                                animationType="slide"
-                                transparent={false}
-                                >
-
-                                    <TouchableOpacity onPress= {() => this.closeModal()}>
-                                        <Text>X</Text>
-                                    </TouchableOpacity>
-                                    
-                                
-                                    {
-                                this.state.commentList ?
-                                
-                                    <FlatList style={{backgroundColor:'cyan'}}
-                                data={this.state.commentList}
-                                keyExtractor={(comments) => comments.createdAt.toString ()}
-                                renderItem={ ({item})=> <Text> {item.autor}: {item.comments}</Text> }
-                                /> :
-                                <Text style={{backgroundColor:'#DCB155', fontSize: 18}}>No Comments</Text>
+                        </View>
+                        <View style={styles.postDescription}>
+                            { this.state.myLike ?
+                                <TouchableOpacity onPress={() => this.dislikePost()}>
+                                    <Text> Quitar like</Text>
+                                </TouchableOpacity>
+                            :
+                                <TouchableOpacity onPress={() => this.likePost()}>
+                                    <Text> Me gusta</Text>
+                                </TouchableOpacity>
                             }
+                        </View>
+                    </View>
+                    { ! this.state.showModal ? null :
+                        <Modal 
+                            visible={this.state.showModal}
+                            animationType="slide"
+                            transparent={false}
+                        >
 
-
-
-                    <View>
+                            <TouchableOpacity onPress= {() => this.closeModal()}>
+                                <Text>Cerrar</Text>
+                            </TouchableOpacity>
+                            {this.state.commentList ?
+                                <FlatList style={{backgroundColor:'cyan'}}
+                                    data={this.state.commentList}
+                                    keyExtractor={(comments) => comments.createdAt.toString ()}
+                                    renderItem={ ({item})=> <Text> {item.autor}: {item.comments}</Text> }
+                                    /> :
+                                    <Text style={{backgroundColor:'#DCB155', fontSize: 18}}>No Comments</Text>
+                            }
+                             <View>
                         <TextInput 
                             placeholder="Comentar"
                             keyboardType="default"
@@ -207,14 +200,15 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     postDescription:{    
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-    textAlign: "center",
-    borderRadius: 8,
-    borderWidth: 1,
-    borderStyle: "solid",
-    backgroundColor: "#DCB155",
-    borderColor: "#fxe59a"
+        paddingHorizontal: 12,
+        paddingVertical: 4,
+        textAlign: "center",
+        borderRadius: 8,
+        borderWidth: 1,
+        borderStyle: "solid",
+        backgroundColor: "#DCB155",
+        borderColor: "#fxe59a",
+        marginHorizontal: 3
 
     },
     infoText:{
@@ -223,9 +217,15 @@ const styles = StyleSheet.create({
         
     },
     out:{
-        fontSize: 12,
-        color: 'cyan',
-        fontStyle: 'underlined'
+        paddingHorizontal: 8,
+        paddingVertical: 4,
+        textAlign: "center",
+        borderRadius: 8,
+        borderWidth: 1,
+        borderStyle: "solid",
+        backgroundColor: "red",
+        borderColor: "#fxe59a",
+        marginHorizontal: 3
     },
     author:{
         fontSize: 20,
@@ -235,6 +235,12 @@ const styles = StyleSheet.create({
     description:{
         fontSize: 10,
         color: 'white',
+    },
+    contenedorBotones:{
+        flexWrap:'',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        margin: 5
     }
     
 })
