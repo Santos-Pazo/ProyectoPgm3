@@ -81,7 +81,8 @@ const styles = StyleSheet.create({
         marginTop: 20,
         flexWrap: 'wrap',
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        
     },
     inputConteiner:{
         width: 50,
