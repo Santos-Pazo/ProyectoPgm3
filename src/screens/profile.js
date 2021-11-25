@@ -10,14 +10,14 @@ class Profile extends Component{
         this.state ={
             posts: [],
             deletePost: '',
-            mostrar: false
+           
         }
     }
     
     
     componentDidMount(){
         db.collection('Posts')
-        .where("owner","==", auth.currentUser.email)
+        .where("owner","==", auth.currentUser.displayName)
         .onSnapshot(
             docs => {
                 let posteos = [];
@@ -27,8 +27,6 @@ class Profile extends Component{
                         data: doc.data()
                     })
                 })
-                
-
                 this.setState({
                     posts: posteos,
                 })
@@ -37,16 +35,7 @@ class Profile extends Component{
         )
     }
 
-    mostrarInfo(){
-        this.setState({
-            mostrar: true
-        })
-    }
-    cerrarInfo(){
-        this.setState({
-            mostrar: false
-        })
-    }
+    
     
     render(){
         return(
@@ -57,33 +46,18 @@ class Profile extends Component{
                             <Text> Logout</Text>
                         </TouchableOpacity>
                     </View>
-                    
-                    <Text style={styles.bienvenido} >Bienvenido a tu perfil {auth.currentUser.displayName} </Text>
-                    <View style={styles.modalConteiner}>
-                        
-                            
-                                
-                                <Text>Email del usuario: {auth.currentUser.email}</Text>
-                                <Text>Fecha de creación: {auth.currentUser.metadata.creationTime}</Text>
-                                <Text>Ultima conexión: {auth.currentUser.metadata.lastSignInTime}</Text>    
-                                <Text>Cantidad de posts: {this.state.posts.length} </Text>
-                                <TouchableOpacity onPress={()=> this.cerrarInfo()} >
-                                    <Text style={styles.button}> Cerrar </Text> 
-                                </TouchableOpacity>
-                           
-                        <TouchableOpacity onPress={()=> this.mostrarInfo()}>
-                            <Text style={styles.button}>Mostrar Info</Text>
-                        </TouchableOpacity>
-                        
-                    </View>
-                    
+                    <Text style={styles.bienvenido} >Bienvenido a tu perfil {auth.currentUser.displayName} </Text>  
+                    <Text>Email del usuario: {auth.currentUser.email}</Text>
+                    <Text>Fecha de creación: {auth.currentUser.metadata.creationTime}</Text>
+                    <Text>Ultima conexión: {auth.currentUser.metadata.lastSignInTime}</Text>    
+                    <Text>Cantidad de posts: {this.state.posts.length} </Text>
                 </View>
                 <View  style={styles.bodyAbajo}>
                     <FlatList 
                            
                             data ={this.state.posts}
                             keyExtractor= {post => post.id}
-                            renderItem= {({item})=> <Post data={item} />}
+                            renderItem= {({item})=> <Post postData={item} />}
                         />
                 </View>
            </React.Fragment>
