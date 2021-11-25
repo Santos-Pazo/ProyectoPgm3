@@ -17,7 +17,7 @@ class Profile extends Component{
     
     componentDidMount(){
         db.collection('Posts')
-        .where("owner","==", auth.currentUser.email)
+        .where("owner","==", auth.currentUser.displayName)
         .onSnapshot(
             docs => {
                 let posteos = [];
@@ -67,13 +67,9 @@ class Profile extends Component{
                                 <Text>Fecha de creación: {auth.currentUser.metadata.creationTime}</Text>
                                 <Text>Ultima conexión: {auth.currentUser.metadata.lastSignInTime}</Text>    
                                 <Text>Cantidad de posts: {this.state.posts.length} </Text>
-                                <TouchableOpacity onPress={()=> this.cerrarInfo()} >
-                                    <Text style={styles.button}> Cerrar </Text> 
-                                </TouchableOpacity>
+                                
 
-                        <TouchableOpacity onPress={()=> this.mostrarInfo()}>
-                            <Text style={styles.button}>Mostrar Info</Text>
-                        </TouchableOpacity>
+                       
                         
                     </View>
                     
@@ -83,7 +79,7 @@ class Profile extends Component{
                            
                             data ={this.state.posts}
                             keyExtractor= {post => post.id}
-                            renderItem= {({item})=> <Post data={item} />}
+                            renderItem= {({item})=> <Post postData={item} />}
                         />
                 </View>
            </React.Fragment>

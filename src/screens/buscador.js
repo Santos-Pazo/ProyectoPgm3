@@ -53,17 +53,17 @@ class Buscador extends Component{
                     </View>
                </View>
 
-               <React.Fragment>
+               <View style={styles.bodyAbajo}>
                     {this.state.posts.length == "0" ?
                         <Text style={styles.alert}>El usuario no existe o todavio no publico </Text> :
                         <FlatList 
-                        style={styles.body}
+                        
                         data ={this.state.posts}
                         keyExtractor= {post => post.id}
                         renderItem= {({item})=> <Post postData={item} />} />
                 
                     }
-               </React.Fragment>
+               </View>
             </React.Fragment>
            
         )
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         display: 'flex',
         flexDirection: 'row',
+        backgroundColor: 'rgba(131, 43, 247, 0.30)'
         
     },
     inputConteiner:{
@@ -112,6 +113,10 @@ const styles = StyleSheet.create({
     },
     alert:{
         color: '#D31B12'
+    },
+    bodyAbajo:{
+        flex: 15,
+        backgroundColor: '#372441'
     }
     
 })
