@@ -38,6 +38,7 @@ class Posts extends Component{
         })
         .catch( e=> console.log(e))
     }
+    
     uploadPicture(foto){
         this.setState({
             foto: foto,

@@ -110,7 +110,6 @@ class Post extends Component{
                         source= {{uri: this.props.postData.data.picture}}
                     />
                     <Text > {this.props.postData.data.owner} </Text>  
-                    <Text >El posteo fue creado el: {this.props.postData.data.createdAt}</Text> 
                     <Text > {this.props.postData.data.post} </Text> 
                     <Text >Likeado Por {this.state.meGustas}</Text>
                     <View >
@@ -196,7 +195,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         marginTop: 50,
         alignItems: 'center',
-        backgroundColor: '#C297DD',
+        backgroundColor: 'rgba(214, 184, 233, 0.29)',
         padding: 30
     },
     postFoto:{
