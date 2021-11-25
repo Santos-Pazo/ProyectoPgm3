@@ -61,7 +61,7 @@ class Home extends Component{
 }
 const styles = StyleSheet.create({
         bodyArriba:{
-            flex: 1,
+            height: 90,
             backgroundColor: 'rgba(131, 43, 247, 0.30)',
         },
         title:{
