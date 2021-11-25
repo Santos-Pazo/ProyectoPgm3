@@ -109,8 +109,7 @@ class Post extends Component{
                         style={{width: '100%', height: 250, borderRadius: '10px',}}
                         source= {{uri: this.props.postData.data.picture}}
                     />
-                    <Text > {this.props.postData.data.owner} </Text>  
-                    <Text >El posteo fue creado el: {this.props.postData.data.createdAt}</Text> 
+                    <Text > {this.props.postData.data.owner} </Text>   
                     <Text > {this.props.postData.data.post} </Text> 
                     <Text >Likeado Por {this.state.meGustas}</Text>
                     <View >
