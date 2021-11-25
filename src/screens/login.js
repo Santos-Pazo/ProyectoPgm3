@@ -18,7 +18,7 @@ class Login extends Component{
     render(){
         return(
            <View style={styles.formContainer}>
-               <Text> Login </Text>
+               <Text style={{color: 'white'}}> Login </Text>
                <TextInput
                     style={styles.input}
                     keyboardType='email-address'
@@ -33,7 +33,7 @@ class Login extends Component{
                     onChangeText={(text)=> this.setState({password: text})}>
                </TextInput>
                <TouchableOpacity onPress={() => this.props.login(this.state.email, this.state.password)} style={styles.boton}  disabled={this.state.email == '' || this.state.password == '' ? true:false}>
-                   <Text> Login </Text>
+                   <Text style={{color: 'white'}}> Login </Text>
                </TouchableOpacity>
  
                {/* <Text>{this.props.errorCode}</Text> */}

@@ -145,25 +145,26 @@ class Post extends Component{
                                 animationType="slide"
                                 transparent={false}
                                 >
-                                    <View style={{backgroundColor: 'rgba(214, 184, 233, 0.29)'}}>
+                                    <View style={{backgroundColor: '#8E05A3', flex: 1}}>
 
                                     <TouchableOpacity onPress= {() => this.closeModal()}>
-                                        <Text>X</Text>
+                                        <Text style={{color: 'white'}}>X</Text>
                                     </TouchableOpacity>
                                     
                                 
                                     {
                                 this.state.commentList ?
                                 
-                                    <FlatList style={{backgroundColor:'cyan'}}
+                                    <FlatList style={{backgroundColor:'#8E05A3'}}
                                 data={this.state.commentList}
                                 keyExtractor={(comments) => comments.createdAt.toString ()}
-                                renderItem={ ({item})=> <Text> {item.autor}: {item.comments}</Text> }
+                                renderItem={ ({item})=> <Text style={{color: 'white'}} > {item.autor}: {item.comments}</Text> }
                                 /> :
-                                <Text style={{backgroundColor:'#DCB155', fontSize: 18}}>No Comments</Text>
+                                <Text style={{fontSize: 18, color: 'white'}}>No Comments</Text>
                             }
                              <View>
                         <TextInput 
+                            style={{color: 'white'}}
                             placeholder="Comentar"
                             keyboardType="default"
                             multiline
@@ -174,7 +175,7 @@ class Post extends Component{
                         <TouchableOpacity 
                             onPress={()=>{this.saveComment()}} 
                             disabled={this.state.comment == '' ? true:false}>
-                            <Text >Save Comment</Text>
+                            <Text style={{color: 'white'}}>Save Comment</Text>
                         </TouchableOpacity>
                     </View>
                     </View>
@@ -192,7 +193,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 3,
         borderRightWidth: 3,
         marginHorizontal: 50,
-        flexWrap: 'wrap',
+        // flexWrap: 'wrap',
         justifyContent: 'space-around',
         marginTop: 50,
         alignItems: 'center',

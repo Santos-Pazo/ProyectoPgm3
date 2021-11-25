@@ -60,7 +60,7 @@ class Posts extends Component{
                     onChangeText={(text)=> this.setState({post: text})}>
                </TextInput>
                
-               <TouchableOpacity onPress={() => this.submit() } style={styles.boton}>
+               <TouchableOpacity onPress={() => this.submit() }  style={styles.submit}>
                    <Text> Submit </Text>
                </TouchableOpacity>
 
@@ -80,6 +80,8 @@ const styles = StyleSheet.create({
     formContainer:{
         paddingHorizontal:10,
         marginTop: 20,
+        backgroundColor: '#8E05A3',
+        flex: 1
     },
     input:{
         height:100,
@@ -90,6 +92,17 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderRadius: 6,
         marginVertical:10,
+    },
+    submit:{    
+        paddingHorizontal: 12,
+        paddingVertical: 4,
+        textAlign: "center",
+        borderRadius: 2,
+        borderWidth: 1,
+        borderStyle: "solid",
+        backgroundColor: "#DCB155",
+        borderColor: "#fxe59a",
+
     },
 })
  

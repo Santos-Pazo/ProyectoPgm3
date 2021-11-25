@@ -67,7 +67,7 @@ import { Camera } from "expo-camera";
                             style={styles.preview}
                             source={ {uri:this.state.photo} }
                         />
-                        <View >
+                        <View style={styles.contenedorBotones}>
                             <TouchableOpacity style={styles.buttonBlue} onPress={()=>this.savePicture()}>
                                 <Text> Aceptar </Text>
                             </TouchableOpacity>
@@ -116,27 +116,23 @@ const styles = StyleSheet.create({
     },
     buttonBlue: {
         flex: 1,
-        backgroundColor: "blue",
-        paddingVertical: 6,
-        paddingHorizontal: 10,
-        fontSize: 20,
-        fontFamily: "arial",
+        paddingHorizontal: 12,
+        paddingVertical: 4,
         textAlign: "center",
         borderWidth: 1,
         borderStyle: "solid",
-        borderColor: "black",
+        backgroundColor: "blue",
+        borderColor: "#fxe59a",
     },
     buttonBlue1: {
         flex: 0.5,
-        backgroundColor: "blue",
-        paddingVertical: 6,
-        paddingHorizontal: 10,
-        fontSize: 20,
-        fontFamily: "arial",
+        paddingHorizontal: 12,
+        paddingVertical: 4,
         textAlign: "center",
         borderWidth: 1,
         borderStyle: "solid",
-        borderColor: "black",
+        backgroundColor: "blue",
+        borderColor: "#fxe59a",
     },
 
     preview:{
@@ -148,6 +144,11 @@ const styles = StyleSheet.create({
     big:{
         textAlign:"center",
         fontSize: 20,
+    },
+    contenedorBotones:{
+        flexWrap:'',
+        flexDirection: 'row',
+        justifyContent: 'space-around'
     }
 
 })
