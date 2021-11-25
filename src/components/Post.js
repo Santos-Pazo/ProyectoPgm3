@@ -109,8 +109,8 @@ class Post extends Component{
                         style={{width: '100%', height: 250, borderRadius: '10px',}}
                         source= {{uri: this.props.postData.data.picture}}
                     />
-                    <Text > {this.props.postData.data.owner} </Text>  
-                    <Text > {this.props.postData.data.post} </Text> 
+                    <Text style={styles.author}>Posted By: {this.props.postData.data.owner} </Text>  
+                    <Text style={styles.description}> {this.props.postData.data.post} </Text> 
                     <Text style={styles.infoText} >Likeado Por {this.state.meGustas}</Text>
                     <View >
                         {this.props.postData.data.owner == auth.currentUser.displayName ?
@@ -138,7 +138,7 @@ class Post extends Component{
                     { ! this.state.showModal ?
                        null
                         :
-                            <Modal style={{backgroundColor: '#372441'}}
+                            <Modal 
                                 visible={this.state.showModal}
                                 animationType="slide"
                                 transparent={false}
@@ -152,12 +152,12 @@ class Post extends Component{
                                     {
                                 this.state.commentList ?
                                 
-                                <FlatList
+                                    <FlatList style={{backgroundColor:'cyan'}}
                                 data={this.state.commentList}
                                 keyExtractor={(comments) => comments.createdAt.toString ()}
                                 renderItem={ ({item})=> <Text> {item.autor}: {item.comments}</Text> }
                                 /> :
-                                <Text>No Comments</Text>
+                                <Text style={{backgroundColor:'#DCB155', fontSize: 18}}>No Comments</Text>
                             }
 
 
@@ -201,8 +201,10 @@ const styles = StyleSheet.create({
     postFoto:{
 
     },
-    postComment:{
-
+    postComment:{ 
+        fontSize: 14,
+        color: 'blue',
+        fontWeight: 'bold'
     },
     postDescription:{    
     paddingHorizontal: 12,
@@ -224,6 +226,15 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: 'cyan',
         fontStyle: 'underlined'
+    },
+    author:{
+        fontSize: 20,
+        color: 'white',
+        fontWeight: 'bold'
+    },
+    description:{
+        fontSize: 10,
+        color: 'white',
     }
     
 })
