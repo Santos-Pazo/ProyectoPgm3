@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderColor: '#ccc',
         borderStyle: 'solid',
+        backgroundColor: 'white',
         borderRadius: 6,
         marginVertical:10,
     },

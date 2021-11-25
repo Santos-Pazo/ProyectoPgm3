@@ -145,40 +145,40 @@ class Post extends Component{
                                 animationType="slide"
                                 transparent={false}
                                 >
-                                    <View style={{backgroundColor: '#8E05A3', flex: 1}}>
+                                <View style={{backgroundColor:'#8E05A3', flex: 1}}>
 
-                                    <TouchableOpacity onPress= {() => this.closeModal()}>
-                                        <Text style={{color: 'white'}}>X</Text>
-                                    </TouchableOpacity>
-                                    
-                                
-                                    {
-                                this.state.commentList ?
-                                
-                                    <FlatList style={{backgroundColor:'#8E05A3'}}
-                                data={this.state.commentList}
-                                keyExtractor={(comments) => comments.createdAt.toString ()}
-                                renderItem={ ({item})=> <Text style={{color: 'white'}} > {item.autor}: {item.comments}</Text> }
-                                /> :
-                                <Text style={{fontSize: 18, color: 'white'}}>No Comments</Text>
-                            }
-                             <View>
-                        <TextInput 
-                            style={{color: 'white'}}
-                            placeholder="Comentar"
-                            keyboardType="default"
-                            multiline
-                            value={this.state.comment}
-                            onChangeText={texto => this.setState({comment: texto})}
-                            
-                        />
-                        <TouchableOpacity 
-                            onPress={()=>{this.saveComment()}} 
-                            disabled={this.state.comment == '' ? true:false}>
-                            <Text style={{color: 'white'}}>Save Comment</Text>
-                        </TouchableOpacity>
-                    </View>
-                    </View>
+                                            <TouchableOpacity onPress= {() => this.closeModal()}>
+                                                <Text style={{color: 'white'}}>X</Text>
+                                            </TouchableOpacity>
+                                            
+                                        
+                                            {
+                                        this.state.commentList ?
+                                        
+                                            <FlatList style={{backgroundColor:'#8E05A3'}}
+                                        data={this.state.commentList}
+                                        keyExtractor={(comments) => comments.createdAt.toString ()}
+                                        renderItem={ ({item})=> <Text style={{color: 'white'}} > {item.autor}: {item.comments}</Text> }
+                                        /> :
+                                        <Text style={{fontSize: 18, color: 'white'}}>No Comments</Text>
+                                        }
+                                        <View>
+                                            <TextInput 
+                                                style={{color: 'white'}}
+                                                placeholder="Comentar"
+                                                keyboardType="default"
+                                                multiline
+                                                value={this.state.comment}
+                                                onChangeText={texto => this.setState({comment: texto})}
+                                                
+                                            />
+                                            <TouchableOpacity 
+                                                onPress={()=>{this.saveComment()}} 
+                                                disabled={this.state.comment == '' ? true:false}>
+                                                <Text style={{color: 'white'}}>Save Comment</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                </View>
                             </Modal>
                            
                 }
@@ -246,7 +246,34 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         margin: 5
-    }
+    },
+    submit:{    
+        paddingHorizontal: 12,
+        paddingVertical: 4,
+        textAlign: "center",
+        borderRadius: 2,
+        borderWidth: 1,
+        borderStyle: "solid",
+        backgroundColor: "#DCB155",
+        borderColor: "#fxe59a",
+    },
+    input:{
+        height:100,
+        paddingVertical:15,
+        paddingHorizontal: 10,
+        borderWidth:1,
+        borderColor: '#ccc',
+        borderStyle: 'solid',
+        borderRadius: 6,
+        marginVertical:10,
+        color: 'white'
+    },
+    formContainer:{
+        paddingHorizontal:10,
+        marginTop: 20,
+        backgroundColor: '#8E05A3',
+        flex: 1
+    },
     
 })
 

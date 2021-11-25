@@ -70,13 +70,6 @@ class Posts extends Component{
     }
 }
 const styles = StyleSheet.create({
-    boton:{
-        backgroundColor: '#28a745',
-        paddingVertical: 6,
-        paddingHorizontal: 10,
-        alignContent: 'center',
-        borderWidth: 1
-    },
     formContainer:{
         paddingHorizontal:10,
         marginTop: 20,
@@ -92,6 +85,7 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderRadius: 6,
         marginVertical:10,
+        color: 'white'
     },
     submit:{    
         paddingHorizontal: 12,
