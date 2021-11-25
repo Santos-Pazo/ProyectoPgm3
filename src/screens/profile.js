@@ -58,15 +58,15 @@ class Profile extends Component{
                         </TouchableOpacity>
                     </View>
                     
-                    <Text style={styles.bienvenido} >Bienvenido a tu perfil {auth.currentUser.displayName} </Text>
+                    <Text style={styles.bienvenido} >Bienvenido a tu perfil, {auth.currentUser.displayName} </Text>
                     <View style={styles.modalConteiner}>
                         
                                 
                                 
-                                <Text>Email del usuario: {auth.currentUser.email}</Text>
-                                <Text>Fecha de creación: {auth.currentUser.metadata.creationTime}</Text>
-                                <Text>Ultima conexión: {auth.currentUser.metadata.lastSignInTime}</Text>    
-                                <Text>Cantidad de posts: {this.state.posts.length} </Text>
+                                <Text style={styles.description}>Email del usuario: {auth.currentUser.email}</Text>
+                                <Text style={styles.description}>Fecha de creación: {auth.currentUser.metadata.creationTime}</Text>
+                                <Text style={styles.description}>Ultima conexión: {auth.currentUser.metadata.lastSignInTime}</Text>    
+                                <Text style={styles.description}>Cantidad de posts: {this.state.posts.length} </Text>
                                 
 
                        
@@ -127,7 +127,16 @@ const styles = StyleSheet.create({
     },
     bienvenido:{
         marginTop: 10,
-    }
+        fontSize: 22,
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    description:{
+        fontSize: 15,
+        color: 'white',
+    },
+
 })
  
 export default Profile

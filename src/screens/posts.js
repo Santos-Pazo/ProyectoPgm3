@@ -23,6 +23,7 @@ class Posts extends Component{
     submit(){
         db.collection('Posts').add({
             owner: auth.currentUser.displayName,
+            ownerEmail: auth.currentUser.email,
             post: this.state.post,
             createdAt: Date.now(),
             picture: this.state.foto
