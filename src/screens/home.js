@@ -40,7 +40,7 @@ class Home extends Component{
                 { this.state.cargando == false ?
                 <React.Fragment>
                     <View style={styles.bodyArriba}> 
-                        <Text >Bienvenidos a Köy </Text>
+                        <Text style={styles.title} >Bienvenidos a Köy </Text>
                     </View>
                     <View style={styles.bodyAbajo}> 
                         <FlatList 
@@ -64,10 +64,18 @@ const styles = StyleSheet.create({
             flex: 1,
             backgroundColor: 'rgba(131, 43, 247, 0.30)',
         },
+        title:{
+            fontSize: 32,
+            color: 'white',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginVertical: '5%'
+        },
         bodyAbajo:{
             flex: 15,
             backgroundColor: '#372441'
         }
+
 
 })
  
