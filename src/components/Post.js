@@ -111,11 +111,11 @@ class Post extends Component{
                     />
                     <Text > {this.props.postData.data.owner} </Text>  
                     <Text > {this.props.postData.data.post} </Text> 
-                    <Text >Likeado Por {this.state.meGustas}</Text>
+                    <Text style={styles.infoText} >Likeado Por {this.state.meGustas}</Text>
                     <View >
                         {this.props.postData.data.owner == auth.currentUser.displayName ?
-                            <TouchableOpacity onPress={() => this.borrar()}  >
-                                <Text>  Borrar </Text>
+                            <TouchableOpacity onPress={() => this.deletePost()}  >
+                                <Text style={styles.out}>  Borrar </Text>
                             </TouchableOpacity> 
                         : null}
                      </View>
@@ -138,7 +138,7 @@ class Post extends Component{
                     { ! this.state.showModal ?
                        null
                         :
-                            <Modal
+                            <Modal style={{backgroundColor: '#372441'}}
                                 visible={this.state.showModal}
                                 animationType="slide"
                                 transparent={false}
@@ -215,6 +215,16 @@ const styles = StyleSheet.create({
     borderColor: "#fxe59a"
 
     },
+    infoText:{
+        fontSize: 10,
+        color: 'white'
+        
+    },
+    out:{
+        fontSize: 12,
+        color: 'cyan',
+        fontStyle: 'underlined'
+    }
     
 })
 
